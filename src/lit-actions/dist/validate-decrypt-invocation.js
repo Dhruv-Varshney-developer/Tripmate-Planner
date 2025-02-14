@@ -13,11 +13,11 @@
     for (var name6 in all)
       __defProp(target, name6, { get: all[name6], enumerable: true });
   };
-  var __copyProps = (to, from11, except, desc) => {
-    if (from11 && typeof from11 === "object" || typeof from11 === "function") {
-      for (let key of __getOwnPropNames(from11))
+  var __copyProps = (to, from10, except, desc) => {
+    if (from10 && typeof from10 === "object" || typeof from10 === "function") {
+      for (let key of __getOwnPropNames(from10))
         if (!__hasOwnProp.call(to, key) && key !== except)
-          __defProp(to, key, { get: () => from11[key], enumerable: !(desc = __getOwnPropDesc(from11, key)) || desc.enumerable });
+          __defProp(to, key, { get: () => from10[key], enumerable: !(desc = __getOwnPropDesc(from10, key)) || desc.enumerable });
     }
     return to;
   };
@@ -33,29 +33,29 @@
   // node_modules/.pnpm/varint@6.0.0/node_modules/varint/encode.js
   var require_encode = __commonJS({
     "node_modules/.pnpm/varint@6.0.0/node_modules/varint/encode.js"(exports, module) {
-      module.exports = encode22;
-      var MSB3 = 128;
-      var REST3 = 127;
-      var MSBALL3 = ~REST3;
-      var INT3 = Math.pow(2, 31);
-      function encode22(num, out, offset) {
+      module.exports = encode20;
+      var MSB2 = 128;
+      var REST2 = 127;
+      var MSBALL2 = ~REST2;
+      var INT2 = Math.pow(2, 31);
+      function encode20(num, out, offset) {
         if (Number.MAX_SAFE_INTEGER && num > Number.MAX_SAFE_INTEGER) {
-          encode22.bytes = 0;
+          encode20.bytes = 0;
           throw new RangeError("Could not encode varint");
         }
         out = out || [];
         offset = offset || 0;
         var oldOffset = offset;
-        while (num >= INT3) {
-          out[offset++] = num & 255 | MSB3;
+        while (num >= INT2) {
+          out[offset++] = num & 255 | MSB2;
           num /= 128;
         }
-        while (num & MSBALL3) {
-          out[offset++] = num & 255 | MSB3;
+        while (num & MSBALL2) {
+          out[offset++] = num & 255 | MSB2;
           num >>>= 7;
         }
         out[offset] = num | 0;
-        encode22.bytes = offset - oldOffset + 1;
+        encode20.bytes = offset - oldOffset + 1;
         return out;
       }
     }
@@ -64,21 +64,21 @@
   // node_modules/.pnpm/varint@6.0.0/node_modules/varint/decode.js
   var require_decode = __commonJS({
     "node_modules/.pnpm/varint@6.0.0/node_modules/varint/decode.js"(exports, module) {
-      module.exports = read7;
-      var MSB3 = 128;
-      var REST3 = 127;
-      function read7(buf2, offset) {
+      module.exports = read6;
+      var MSB2 = 128;
+      var REST2 = 127;
+      function read6(buf2, offset) {
         var res = 0, offset = offset || 0, shift = 0, counter = offset, b, l = buf2.length;
         do {
           if (counter >= l || shift > 49) {
-            read7.bytes = 0;
+            read6.bytes = 0;
             throw new RangeError("Could not decode varint");
           }
           b = buf2[counter++];
-          res += shift < 28 ? (b & REST3) << shift : (b & REST3) * Math.pow(2, shift);
+          res += shift < 28 ? (b & REST2) << shift : (b & REST2) * Math.pow(2, shift);
           shift += 7;
-        } while (b >= MSB3);
-        read7.bytes = counter - offset;
+        } while (b >= MSB2);
+        read6.bytes = counter - offset;
         return res;
       }
     }
@@ -87,17 +87,17 @@
   // node_modules/.pnpm/varint@6.0.0/node_modules/varint/length.js
   var require_length = __commonJS({
     "node_modules/.pnpm/varint@6.0.0/node_modules/varint/length.js"(exports, module) {
-      var N13 = Math.pow(2, 7);
-      var N23 = Math.pow(2, 14);
-      var N33 = Math.pow(2, 21);
-      var N43 = Math.pow(2, 28);
-      var N53 = Math.pow(2, 35);
-      var N63 = Math.pow(2, 42);
-      var N73 = Math.pow(2, 49);
-      var N83 = Math.pow(2, 56);
-      var N93 = Math.pow(2, 63);
+      var N12 = Math.pow(2, 7);
+      var N22 = Math.pow(2, 14);
+      var N32 = Math.pow(2, 21);
+      var N42 = Math.pow(2, 28);
+      var N52 = Math.pow(2, 35);
+      var N62 = Math.pow(2, 42);
+      var N72 = Math.pow(2, 49);
+      var N82 = Math.pow(2, 56);
+      var N92 = Math.pow(2, 63);
       module.exports = function(value) {
-        return value < N13 ? 1 : value < N23 ? 2 : value < N33 ? 3 : value < N43 ? 4 : value < N53 ? 5 : value < N63 ? 6 : value < N73 ? 7 : value < N83 ? 8 : value < N93 ? 9 : 10;
+        return value < N12 ? 1 : value < N22 ? 2 : value < N32 ? 3 : value < N42 ? 4 : value < N52 ? 5 : value < N62 ? 6 : value < N72 ? 7 : value < N82 ? 8 : value < N92 ? 9 : 10;
       };
     }
   });
@@ -119,14 +119,14 @@
     }
   });
 
-  // node_modules/.pnpm/@ipld+dag-ucan@3.4.0/node_modules/@ipld/dag-ucan/src/lib.js
+  // node_modules/.pnpm/@ipld+dag-ucan@3.4.5/node_modules/@ipld/dag-ucan/src/lib.js
   var lib_exports = {};
   __export(lib_exports, {
     VERSION: () => VERSION,
     code: () => code5,
-    decode: () => decode18,
-    encode: () => encode15,
-    format: () => format6,
+    decode: () => decode14,
+    encode: () => encode13,
+    format: () => format5,
     isExpired: () => isExpired,
     isTooEarly: () => isTooEarly,
     issue: () => issue,
@@ -138,7 +138,7 @@
     write: () => write
   });
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/is.js
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/is.js
   var typeofs = [
     "string",
     "number",
@@ -221,7 +221,7 @@
     return void 0;
   }
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/token.js
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/token.js
   var Type = class {
     /**
      * @param {number} major
@@ -278,7 +278,7 @@
     }
   };
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/byte-utils.js
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/byte-utils.js
   var useBuffer = globalThis.process && // @ts-ignore
   !globalThis.process.browser && // @ts-ignore
   globalThis.Buffer && // @ts-ignore
@@ -374,13 +374,13 @@
      * @param {number} length
      * @returns {Uint8Array}
      */
-    (chunks, length3) => {
+    (chunks, length2) => {
       chunks = chunks.map((c) => c instanceof Uint8Array ? c : (
         // eslint-disable-line operator-linebreak
         // @ts-ignore
         globalThis.Buffer.from(c)
       ));
-      return asU8A(globalThis.Buffer.concat(chunks, length3));
+      return asU8A(globalThis.Buffer.concat(chunks, length2));
     }
   ) : (
     // eslint-disable-line operator-linebreak
@@ -389,8 +389,8 @@
      * @param {number} length
      * @returns {Uint8Array}
      */
-    (chunks, length3) => {
-      const out = new Uint8Array(length3);
+    (chunks, length2) => {
+      const out = new Uint8Array(length2);
       let off = 0;
       for (let b of chunks) {
         if (off + b.length > out.length) {
@@ -532,7 +532,7 @@
     return res;
   }
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/bl.js
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/bl.js
   var defaultChunkSize = 256;
   var Bl = class {
     /**
@@ -613,7 +613,7 @@
     }
   };
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/common.js
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/common.js
   var decodeErrPrefix = "CBOR decode error:";
   var encodeErrPrefix = "CBOR encode error:";
   var uintMinorPrefixBytes = [];
@@ -628,7 +628,7 @@
     }
   }
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/0uint.js
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/0uint.js
   var uintBoundaries = [24, 256, 65536, 4294967296, BigInt("18446744073709551616")];
   function readUint8(data, offset, options) {
     assertEnoughData(data, offset, 1);
@@ -749,7 +749,7 @@
     );
   };
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/1negint.js
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/1negint.js
   function decodeNegint8(data, pos, _minor, options) {
     return new Token(Type.negint, -1 - readUint8(data, pos + 1, options), 2);
   }
@@ -803,11 +803,11 @@
     );
   };
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/2bytes.js
-  function toToken(data, pos, prefix, length3) {
-    assertEnoughData(data, pos, prefix + length3);
-    const buf2 = slice(data, pos + prefix, pos + prefix + length3);
-    return new Token(Type.bytes, buf2, prefix + length3);
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/2bytes.js
+  function toToken(data, pos, prefix, length2) {
+    assertEnoughData(data, pos, prefix + length2);
+    const buf2 = slice(data, pos + prefix, pos + prefix + length2);
+    return new Token(Type.bytes, buf2, prefix + length2);
   }
   function decodeBytesCompact(data, pos, minor, _options) {
     return toToken(data, pos, 1, minor);
@@ -850,9 +850,9 @@
     return b1.length < b2.length ? -1 : b1.length > b2.length ? 1 : compare(b1, b2);
   }
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/3string.js
-  function toToken2(data, pos, prefix, length3, options) {
-    const totLength = prefix + length3;
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/3string.js
+  function toToken2(data, pos, prefix, length2, options) {
+    const totLength = prefix + length2;
     assertEnoughData(data, pos, totLength);
     const tok = new Token(Type.string, toString(data, pos + prefix, pos + totLength), totLength);
     if (options.retainStringBytes === true) {
@@ -881,9 +881,9 @@
   }
   var encodeString = encodeBytes;
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/4array.js
-  function toToken3(_data, _pos, prefix, length3) {
-    return new Token(Type.array, length3, prefix);
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/4array.js
+  function toToken3(_data, _pos, prefix, length2) {
+    return new Token(Type.array, length2, prefix);
   }
   function decodeArrayCompact(data, pos, minor, _options) {
     return toToken3(data, pos, 1, minor);
@@ -918,9 +918,9 @@
     return encodeUintValue.encodedSize(token.value);
   };
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/5map.js
-  function toToken4(_data, _pos, prefix, length3) {
-    return new Token(Type.map, length3, prefix);
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/5map.js
+  function toToken4(_data, _pos, prefix, length2) {
+    return new Token(Type.map, length2, prefix);
   }
   function decodeMapCompact(data, pos, minor, _options) {
     return toToken4(data, pos, 1, minor);
@@ -955,7 +955,7 @@
     return encodeUintValue.encodedSize(token.value);
   };
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/6tag.js
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/6tag.js
   function decodeTagCompact(_data, _pos, minor, _options) {
     return new Token(Type.tag, minor, 1);
   }
@@ -979,7 +979,7 @@
     return encodeUintValue.encodedSize(token.value);
   };
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/7float.js
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/7float.js
   var MINOR_FALSE = 20;
   var MINOR_TRUE = 21;
   var MINOR_NULL = 22;
@@ -1155,7 +1155,7 @@
   }
   encodeFloat.compareTokens = encodeUint.compareTokens;
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/jump.js
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/jump.js
   function invalidMinor(data, pos, minor) {
     throw new Error(`${decodeErrPrefix} encountered invalid minor (${minor}) for major ${data[pos] >>> 5}`);
   }
@@ -1311,7 +1311,7 @@
     }
   }
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/encode.js
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/encode.js
   var defaultEncodeOptions = {
     float64: false,
     mapSorter,
@@ -1509,8 +1509,8 @@
     Object(obj, typ, options, refStack) {
       const isMap = typ !== "Object";
       const keys = isMap ? obj.keys() : Object.keys(obj);
-      const length3 = isMap ? obj.size : keys.length;
-      if (!length3) {
+      const length2 = isMap ? obj.size : keys.length;
+      if (!length2) {
         if (options.addBreakTokens === true) {
           return [simpleTokens.emptyMap, new Token(Type.break)];
         }
@@ -1527,9 +1527,9 @@
       }
       sortMapEntries(entries2, options);
       if (options.addBreakTokens) {
-        return [new Token(Type.map, length3), entries2, new Token(Type.break)];
+        return [new Token(Type.map, length2), entries2, new Token(Type.break)];
       }
-      return [new Token(Type.map, length3), entries2];
+      return [new Token(Type.map, length2), entries2];
     }
   };
   typeEncoders.Map = typeEncoders.Object;
@@ -1607,7 +1607,7 @@
     return encodeCustom(data, cborEncoders, options);
   }
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/decode.js
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/decode.js
   var defaultDecodeOptions = {
     strict: false,
     allowIndefinite: true,
@@ -1748,7 +1748,7 @@
     return decoded;
   }
 
-  // node_modules/.pnpm/multiformats@13.3.1/node_modules/multiformats/dist/src/bytes.js
+  // node_modules/.pnpm/multiformats@13.3.2/node_modules/multiformats/dist/src/bytes.js
   var empty = new Uint8Array(0);
   function equals(aa, bb) {
     if (aa === bb)
@@ -1774,7 +1774,7 @@
     throw new Error("Unknown type, must be binary type");
   }
 
-  // node_modules/.pnpm/multiformats@13.3.1/node_modules/multiformats/dist/src/vendor/base-x.js
+  // node_modules/.pnpm/multiformats@13.3.2/node_modules/multiformats/dist/src/vendor/base-x.js
   function base(ALPHABET, name6) {
     if (ALPHABET.length >= 255) {
       throw new TypeError("Alphabet too long");
@@ -1795,7 +1795,7 @@
     var LEADER = ALPHABET.charAt(0);
     var FACTOR = Math.log(BASE) / Math.log(256);
     var iFACTOR = Math.log(256) / Math.log(BASE);
-    function encode22(source) {
+    function encode20(source) {
       if (source instanceof Uint8Array)
         ;
       else if (ArrayBuffer.isView(source)) {
@@ -1810,7 +1810,7 @@
         return "";
       }
       var zeroes = 0;
-      var length3 = 0;
+      var length2 = 0;
       var pbegin = 0;
       var pend = source.length;
       while (pbegin !== pend && source[pbegin] === 0) {
@@ -1822,7 +1822,7 @@
       while (pbegin !== pend) {
         var carry = source[pbegin];
         var i2 = 0;
-        for (var it1 = size2 - 1; (carry !== 0 || i2 < length3) && it1 !== -1; it1--, i2++) {
+        for (var it1 = size2 - 1; (carry !== 0 || i2 < length2) && it1 !== -1; it1--, i2++) {
           carry += 256 * b58[it1] >>> 0;
           b58[it1] = carry % BASE >>> 0;
           carry = carry / BASE >>> 0;
@@ -1830,10 +1830,10 @@
         if (carry !== 0) {
           throw new Error("Non-zero carry");
         }
-        length3 = i2;
+        length2 = i2;
         pbegin++;
       }
-      var it2 = size2 - length3;
+      var it2 = size2 - length2;
       while (it2 !== size2 && b58[it2] === 0) {
         it2++;
       }
@@ -1855,7 +1855,7 @@
         return;
       }
       var zeroes = 0;
-      var length3 = 0;
+      var length2 = 0;
       while (source[psz] === LEADER) {
         zeroes++;
         psz++;
@@ -1868,7 +1868,7 @@
           return;
         }
         var i2 = 0;
-        for (var it3 = size2 - 1; (carry !== 0 || i2 < length3) && it3 !== -1; it3--, i2++) {
+        for (var it3 = size2 - 1; (carry !== 0 || i2 < length2) && it3 !== -1; it3--, i2++) {
           carry += BASE * b256[it3] >>> 0;
           b256[it3] = carry % 256 >>> 0;
           carry = carry / 256 >>> 0;
@@ -1876,13 +1876,13 @@
         if (carry !== 0) {
           throw new Error("Non-zero carry");
         }
-        length3 = i2;
+        length2 = i2;
         psz++;
       }
       if (source[psz] === " ") {
         return;
       }
-      var it4 = size2 - length3;
+      var it4 = size2 - length2;
       while (it4 !== size2 && b256[it4] === 0) {
         it4++;
       }
@@ -1893,7 +1893,7 @@
       }
       return vch;
     }
-    function decode29(string2) {
+    function decode25(string2) {
       var buffer2 = decodeUnsafe(string2);
       if (buffer2) {
         return buffer2;
@@ -1901,16 +1901,16 @@
       throw new Error(`Non-${name6} character`);
     }
     return {
-      encode: encode22,
+      encode: encode20,
       decodeUnsafe,
-      decode: decode29
+      decode: decode25
     };
   }
   var src = base;
   var _brrp__multiformats_scope_baseX = src;
   var base_x_default = _brrp__multiformats_scope_baseX;
 
-  // node_modules/.pnpm/multiformats@13.3.1/node_modules/multiformats/dist/src/bases/base.js
+  // node_modules/.pnpm/multiformats@13.3.2/node_modules/multiformats/dist/src/bases/base.js
   var Encoder = class {
     name;
     prefix;
@@ -2003,16 +2003,16 @@
       return this.decoder.decode(input);
     }
   };
-  function from({ name: name6, prefix, encode: encode22, decode: decode29 }) {
-    return new Codec(name6, prefix, encode22, decode29);
+  function from({ name: name6, prefix, encode: encode20, decode: decode25 }) {
+    return new Codec(name6, prefix, encode20, decode25);
   }
   function baseX({ name: name6, prefix, alphabet }) {
-    const { encode: encode22, decode: decode29 } = base_x_default(alphabet, name6);
+    const { encode: encode20, decode: decode25 } = base_x_default(alphabet, name6);
     return from({
       prefix,
       name: name6,
-      encode: encode22,
-      decode: (text2) => coerce(decode29(text2))
+      encode: encode20,
+      decode: (text2) => coerce(decode25(text2))
     });
   }
   function decode2(string2, alphabet, bitsPerChar, name6) {
@@ -2082,7 +2082,7 @@
     });
   }
 
-  // node_modules/.pnpm/multiformats@13.3.1/node_modules/multiformats/dist/src/bases/base32.js
+  // node_modules/.pnpm/multiformats@13.3.2/node_modules/multiformats/dist/src/bases/base32.js
   var base32 = rfc4648({
     prefix: "b",
     name: "base32",
@@ -2138,7 +2138,7 @@
     bitsPerChar: 5
   });
 
-  // node_modules/.pnpm/multiformats@13.3.1/node_modules/multiformats/dist/src/bases/base36.js
+  // node_modules/.pnpm/multiformats@13.3.2/node_modules/multiformats/dist/src/bases/base36.js
   var base36 = baseX({
     prefix: "k",
     name: "base36",
@@ -2150,7 +2150,7 @@
     alphabet: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   });
 
-  // node_modules/.pnpm/multiformats@13.3.1/node_modules/multiformats/dist/src/bases/base58.js
+  // node_modules/.pnpm/multiformats@13.3.2/node_modules/multiformats/dist/src/bases/base58.js
   var base58btc = baseX({
     name: "base58btc",
     prefix: "z",
@@ -2162,7 +2162,15 @@
     alphabet: "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
   });
 
-  // node_modules/.pnpm/multiformats@13.3.1/node_modules/multiformats/dist/src/vendor/varint.js
+  // node_modules/.pnpm/multiformats@13.3.2/node_modules/multiformats/dist/src/varint.js
+  var varint_exports = {};
+  __export(varint_exports, {
+    decode: () => decode4,
+    encodeTo: () => encodeTo,
+    encodingLength: () => encodingLength
+  });
+
+  // node_modules/.pnpm/multiformats@13.3.2/node_modules/multiformats/dist/src/vendor/varint.js
   var encode_1 = encode3;
   var MSB = 128;
   var REST = 127;
@@ -2221,7 +2229,7 @@
   var _brrp_varint = varint;
   var varint_default = _brrp_varint;
 
-  // node_modules/.pnpm/multiformats@13.3.1/node_modules/multiformats/dist/src/varint.js
+  // node_modules/.pnpm/multiformats@13.3.2/node_modules/multiformats/dist/src/varint.js
   function decode4(data, offset = 0) {
     const code9 = varint_default.decode(data, offset);
     return [code9, varint_default.decode.bytes];
@@ -2234,7 +2242,7 @@
     return varint_default.encodingLength(int);
   }
 
-  // node_modules/.pnpm/multiformats@13.3.1/node_modules/multiformats/dist/src/hashes/digest.js
+  // node_modules/.pnpm/multiformats@13.3.2/node_modules/multiformats/dist/src/hashes/digest.js
   function create(code9, digest2) {
     const size2 = digest2.byteLength;
     const sizeOffset = encodingLength(code9);
@@ -2279,25 +2287,25 @@
     }
   };
 
-  // node_modules/.pnpm/multiformats@13.3.1/node_modules/multiformats/dist/src/cid.js
-  function format(link4, base3) {
+  // node_modules/.pnpm/multiformats@13.3.2/node_modules/multiformats/dist/src/cid.js
+  function format(link4, base2) {
     const { bytes: bytes2, version } = link4;
     switch (version) {
       case 0:
-        return toStringV0(bytes2, baseCache(link4), base3 ?? base58btc.encoder);
+        return toStringV0(bytes2, baseCache(link4), base2 ?? base58btc.encoder);
       default:
-        return toStringV1(bytes2, baseCache(link4), base3 ?? base32.encoder);
+        return toStringV1(bytes2, baseCache(link4), base2 ?? base32.encoder);
     }
   }
   var cache = /* @__PURE__ */ new WeakMap();
   function baseCache(cid) {
-    const baseCache3 = cache.get(cid);
-    if (baseCache3 == null) {
-      const baseCache4 = /* @__PURE__ */ new Map();
-      cache.set(cid, baseCache4);
-      return baseCache4;
+    const baseCache2 = cache.get(cid);
+    if (baseCache2 == null) {
+      const baseCache3 = /* @__PURE__ */ new Map();
+      cache.set(cid, baseCache3);
+      return baseCache3;
     }
-    return baseCache3;
+    return baseCache2;
   }
   var CID = class _CID {
     code;
@@ -2376,8 +2384,8 @@
       const unknown2 = other;
       return unknown2 != null && self2.code === unknown2.code && self2.version === unknown2.version && equals2(self2.multihash, unknown2.multihash);
     }
-    toString(base3) {
-      return format(this, base3);
+    toString(base2) {
+      return format(this, base2);
     }
     toJSON() {
       return { "/": format(this) };
@@ -2509,8 +2517,8 @@
     static inspectBytes(initialBytes) {
       let offset = 0;
       const next = () => {
-        const [i, length3] = decode4(initialBytes.subarray(offset));
-        offset += length3;
+        const [i, length2] = decode4(initialBytes.subarray(offset));
+        offset += length2;
         return i;
       };
       let version = next();
@@ -2537,8 +2545,8 @@
      * throw an error if encoding of the CID is not compatible with supplied (or
      * a default decoder).
      */
-    static parse(source, base3) {
-      const [prefix, bytes2] = parseCIDtoBytes(source, base3);
+    static parse(source, base2) {
+      const [prefix, bytes2] = parseCIDtoBytes(source, base2);
       const cid = _CID.decode(bytes2);
       if (cid.version === 0 && source[0] !== "Q") {
         throw Error("Version 0 CID string must not include multibase prefix");
@@ -2547,56 +2555,56 @@
       return cid;
     }
   };
-  function parseCIDtoBytes(source, base3) {
+  function parseCIDtoBytes(source, base2) {
     switch (source[0]) {
       // CIDv0 is parsed differently
       case "Q": {
-        const decoder2 = base3 ?? base58btc;
+        const decoder2 = base2 ?? base58btc;
         return [
           base58btc.prefix,
           decoder2.decode(`${base58btc.prefix}${source}`)
         ];
       }
       case base58btc.prefix: {
-        const decoder2 = base3 ?? base58btc;
+        const decoder2 = base2 ?? base58btc;
         return [base58btc.prefix, decoder2.decode(source)];
       }
       case base32.prefix: {
-        const decoder2 = base3 ?? base32;
+        const decoder2 = base2 ?? base32;
         return [base32.prefix, decoder2.decode(source)];
       }
       case base36.prefix: {
-        const decoder2 = base3 ?? base36;
+        const decoder2 = base2 ?? base36;
         return [base36.prefix, decoder2.decode(source)];
       }
       default: {
-        if (base3 == null) {
+        if (base2 == null) {
           throw Error("To parse non base32, base36 or base58btc encoded CID multibase decoder must be provided");
         }
-        return [source[0], base3.decode(source)];
+        return [source[0], base2.decode(source)];
       }
     }
   }
-  function toStringV0(bytes2, cache3, base3) {
-    const { prefix } = base3;
+  function toStringV0(bytes2, cache2, base2) {
+    const { prefix } = base2;
     if (prefix !== base58btc.prefix) {
-      throw Error(`Cannot string encode V0 in ${base3.name} encoding`);
+      throw Error(`Cannot string encode V0 in ${base2.name} encoding`);
     }
-    const cid = cache3.get(prefix);
+    const cid = cache2.get(prefix);
     if (cid == null) {
-      const cid2 = base3.encode(bytes2).slice(1);
-      cache3.set(prefix, cid2);
+      const cid2 = base2.encode(bytes2).slice(1);
+      cache2.set(prefix, cid2);
       return cid2;
     } else {
       return cid;
     }
   }
-  function toStringV1(bytes2, cache3, base3) {
-    const { prefix } = base3;
-    const cid = cache3.get(prefix);
+  function toStringV1(bytes2, cache2, base2) {
+    const { prefix } = base2;
+    const cid = cache2.get(prefix);
     if (cid == null) {
-      const cid2 = base3.encode(bytes2);
-      cache3.set(prefix, cid2);
+      const cid2 = base2.encode(bytes2);
+      cache2.set(prefix, cid2);
       return cid2;
     } else {
       return cid;
@@ -2693,1141 +2701,71 @@
   var encode4 = (node) => encode(node, _encodeOptions);
   var decode6 = (data) => decode(toByteView(data), _decodeOptions);
 
-  // node_modules/.pnpm/@ipld+dag-ucan@3.4.0/node_modules/@ipld/dag-ucan/src/utf8.js
+  // node_modules/.pnpm/@ipld+dag-ucan@3.4.5/node_modules/@ipld/dag-ucan/src/utf8.js
   var encoder = new TextEncoder();
   var decoder = new TextDecoder();
   var encode5 = (text2) => encoder.encode(text2);
   var decode7 = (bytes2) => decoder.decode(bytes2);
 
-  // node_modules/.pnpm/multiformats@11.0.2/node_modules/multiformats/src/varint.js
-  var varint_exports2 = {};
-  __export(varint_exports2, {
-    decode: () => decode9,
-    encodeTo: () => encodeTo2,
-    encodingLength: () => encodingLength2
-  });
-
-  // node_modules/.pnpm/multiformats@11.0.2/node_modules/multiformats/vendor/varint.js
-  var encode_12 = encode6;
-  var MSB2 = 128;
-  var REST2 = 127;
-  var MSBALL2 = ~REST2;
-  var INT2 = Math.pow(2, 31);
-  function encode6(num, out, offset) {
-    out = out || [];
-    offset = offset || 0;
-    var oldOffset = offset;
-    while (num >= INT2) {
-      out[offset++] = num & 255 | MSB2;
-      num /= 128;
-    }
-    while (num & MSBALL2) {
-      out[offset++] = num & 255 | MSB2;
-      num >>>= 7;
-    }
-    out[offset] = num | 0;
-    encode6.bytes = offset - oldOffset + 1;
-    return out;
-  }
-  var decode8 = read2;
-  var MSB$12 = 128;
-  var REST$12 = 127;
-  function read2(buf2, offset) {
-    var res = 0, offset = offset || 0, shift = 0, counter = offset, b, l = buf2.length;
-    do {
-      if (counter >= l) {
-        read2.bytes = 0;
-        throw new RangeError("Could not decode varint");
-      }
-      b = buf2[counter++];
-      res += shift < 28 ? (b & REST$12) << shift : (b & REST$12) * Math.pow(2, shift);
-      shift += 7;
-    } while (b >= MSB$12);
-    read2.bytes = counter - offset;
-    return res;
-  }
-  var N12 = Math.pow(2, 7);
-  var N22 = Math.pow(2, 14);
-  var N32 = Math.pow(2, 21);
-  var N42 = Math.pow(2, 28);
-  var N52 = Math.pow(2, 35);
-  var N62 = Math.pow(2, 42);
-  var N72 = Math.pow(2, 49);
-  var N82 = Math.pow(2, 56);
-  var N92 = Math.pow(2, 63);
-  var length2 = function(value) {
-    return value < N12 ? 1 : value < N22 ? 2 : value < N32 ? 3 : value < N42 ? 4 : value < N52 ? 5 : value < N62 ? 6 : value < N72 ? 7 : value < N82 ? 8 : value < N92 ? 9 : 10;
-  };
-  var varint2 = {
-    encode: encode_12,
-    decode: decode8,
-    encodingLength: length2
-  };
-  var _brrp_varint2 = varint2;
-  var varint_default2 = _brrp_varint2;
-
-  // node_modules/.pnpm/multiformats@11.0.2/node_modules/multiformats/src/varint.js
-  var decode9 = (data, offset = 0) => {
-    const code9 = varint_default2.decode(data, offset);
-    return [code9, varint_default2.decode.bytes];
-  };
-  var encodeTo2 = (int, target, offset = 0) => {
-    varint_default2.encode(int, target, offset);
-    return target;
-  };
-  var encodingLength2 = (int) => {
-    return varint_default2.encodingLength(int);
-  };
-
-  // node_modules/.pnpm/multiformats@11.0.2/node_modules/multiformats/src/bytes.js
-  var empty2 = new Uint8Array(0);
-  var equals3 = (aa, bb) => {
-    if (aa === bb) return true;
-    if (aa.byteLength !== bb.byteLength) {
-      return false;
-    }
-    for (let ii = 0; ii < aa.byteLength; ii++) {
-      if (aa[ii] !== bb[ii]) {
-        return false;
-      }
-    }
-    return true;
-  };
-  var coerce2 = (o) => {
-    if (o instanceof Uint8Array && o.constructor.name === "Uint8Array") return o;
-    if (o instanceof ArrayBuffer) return new Uint8Array(o);
-    if (ArrayBuffer.isView(o)) {
-      return new Uint8Array(o.buffer, o.byteOffset, o.byteLength);
-    }
-    throw new Error("Unknown type, must be binary type");
-  };
-
-  // node_modules/.pnpm/multiformats@11.0.2/node_modules/multiformats/src/hashes/digest.js
-  var create2 = (code9, digest2) => {
-    const size2 = digest2.byteLength;
-    const sizeOffset = encodingLength2(code9);
-    const digestOffset = sizeOffset + encodingLength2(size2);
-    const bytes2 = new Uint8Array(digestOffset + size2);
-    encodeTo2(code9, bytes2, 0);
-    encodeTo2(size2, bytes2, sizeOffset);
-    bytes2.set(digest2, digestOffset);
-    return new Digest2(code9, size2, digest2, bytes2);
-  };
-  var decode10 = (multihash) => {
-    const bytes2 = coerce2(multihash);
-    const [code9, sizeOffset] = decode9(bytes2);
-    const [size2, digestOffset] = decode9(bytes2.subarray(sizeOffset));
-    const digest2 = bytes2.subarray(sizeOffset + digestOffset);
-    if (digest2.byteLength !== size2) {
-      throw new Error("Incorrect length");
-    }
-    return new Digest2(code9, size2, digest2, bytes2);
-  };
-  var equals4 = (a, b) => {
-    if (a === b) {
-      return true;
-    } else {
-      const data = (
-        /** @type {{code?:unknown, size?:unknown, bytes?:unknown}} */
-        b
-      );
-      return a.code === data.code && a.size === data.size && data.bytes instanceof Uint8Array && equals3(a.bytes, data.bytes);
-    }
-  };
-  var Digest2 = class {
-    /**
-     * Creates a multihash digest.
-     *
-     * @param {Code} code
-     * @param {Size} size
-     * @param {Uint8Array} digest
-     * @param {Uint8Array} bytes
-     */
-    constructor(code9, size2, digest2, bytes2) {
-      this.code = code9;
-      this.size = size2;
-      this.digest = digest2;
-      this.bytes = bytes2;
-    }
-  };
-
-  // node_modules/.pnpm/multiformats@11.0.2/node_modules/multiformats/vendor/base-x.js
-  function base2(ALPHABET, name6) {
-    if (ALPHABET.length >= 255) {
-      throw new TypeError("Alphabet too long");
-    }
-    var BASE_MAP = new Uint8Array(256);
-    for (var j = 0; j < BASE_MAP.length; j++) {
-      BASE_MAP[j] = 255;
-    }
-    for (var i = 0; i < ALPHABET.length; i++) {
-      var x = ALPHABET.charAt(i);
-      var xc = x.charCodeAt(0);
-      if (BASE_MAP[xc] !== 255) {
-        throw new TypeError(x + " is ambiguous");
-      }
-      BASE_MAP[xc] = i;
-    }
-    var BASE = ALPHABET.length;
-    var LEADER = ALPHABET.charAt(0);
-    var FACTOR = Math.log(BASE) / Math.log(256);
-    var iFACTOR = Math.log(256) / Math.log(BASE);
-    function encode22(source) {
-      if (source instanceof Uint8Array) ;
-      else if (ArrayBuffer.isView(source)) {
-        source = new Uint8Array(source.buffer, source.byteOffset, source.byteLength);
-      } else if (Array.isArray(source)) {
-        source = Uint8Array.from(source);
-      }
-      if (!(source instanceof Uint8Array)) {
-        throw new TypeError("Expected Uint8Array");
-      }
-      if (source.length === 0) {
-        return "";
-      }
-      var zeroes = 0;
-      var length3 = 0;
-      var pbegin = 0;
-      var pend = source.length;
-      while (pbegin !== pend && source[pbegin] === 0) {
-        pbegin++;
-        zeroes++;
-      }
-      var size2 = (pend - pbegin) * iFACTOR + 1 >>> 0;
-      var b58 = new Uint8Array(size2);
-      while (pbegin !== pend) {
-        var carry = source[pbegin];
-        var i2 = 0;
-        for (var it1 = size2 - 1; (carry !== 0 || i2 < length3) && it1 !== -1; it1--, i2++) {
-          carry += 256 * b58[it1] >>> 0;
-          b58[it1] = carry % BASE >>> 0;
-          carry = carry / BASE >>> 0;
-        }
-        if (carry !== 0) {
-          throw new Error("Non-zero carry");
-        }
-        length3 = i2;
-        pbegin++;
-      }
-      var it2 = size2 - length3;
-      while (it2 !== size2 && b58[it2] === 0) {
-        it2++;
-      }
-      var str = LEADER.repeat(zeroes);
-      for (; it2 < size2; ++it2) {
-        str += ALPHABET.charAt(b58[it2]);
-      }
-      return str;
-    }
-    function decodeUnsafe(source) {
-      if (typeof source !== "string") {
-        throw new TypeError("Expected String");
-      }
-      if (source.length === 0) {
-        return new Uint8Array();
-      }
-      var psz = 0;
-      if (source[psz] === " ") {
-        return;
-      }
-      var zeroes = 0;
-      var length3 = 0;
-      while (source[psz] === LEADER) {
-        zeroes++;
-        psz++;
-      }
-      var size2 = (source.length - psz) * FACTOR + 1 >>> 0;
-      var b256 = new Uint8Array(size2);
-      while (source[psz]) {
-        var carry = BASE_MAP[source.charCodeAt(psz)];
-        if (carry === 255) {
-          return;
-        }
-        var i2 = 0;
-        for (var it3 = size2 - 1; (carry !== 0 || i2 < length3) && it3 !== -1; it3--, i2++) {
-          carry += BASE * b256[it3] >>> 0;
-          b256[it3] = carry % 256 >>> 0;
-          carry = carry / 256 >>> 0;
-        }
-        if (carry !== 0) {
-          throw new Error("Non-zero carry");
-        }
-        length3 = i2;
-        psz++;
-      }
-      if (source[psz] === " ") {
-        return;
-      }
-      var it4 = size2 - length3;
-      while (it4 !== size2 && b256[it4] === 0) {
-        it4++;
-      }
-      var vch = new Uint8Array(zeroes + (size2 - it4));
-      var j2 = zeroes;
-      while (it4 !== size2) {
-        vch[j2++] = b256[it4++];
-      }
-      return vch;
-    }
-    function decode29(string2) {
-      var buffer2 = decodeUnsafe(string2);
-      if (buffer2) {
-        return buffer2;
-      }
-      throw new Error(`Non-${name6} character`);
-    }
-    return {
-      encode: encode22,
-      decodeUnsafe,
-      decode: decode29
-    };
-  }
-  var src2 = base2;
-  var _brrp__multiformats_scope_baseX2 = src2;
-  var base_x_default2 = _brrp__multiformats_scope_baseX2;
-
-  // node_modules/.pnpm/multiformats@11.0.2/node_modules/multiformats/src/bases/base.js
-  var Encoder2 = class {
-    /**
-     * @param {Base} name
-     * @param {Prefix} prefix
-     * @param {(bytes:Uint8Array) => string} baseEncode
-     */
-    constructor(name6, prefix, baseEncode) {
-      this.name = name6;
-      this.prefix = prefix;
-      this.baseEncode = baseEncode;
-    }
-    /**
-     * @param {Uint8Array} bytes
-     * @returns {API.Multibase<Prefix>}
-     */
-    encode(bytes2) {
-      if (bytes2 instanceof Uint8Array) {
-        return `${this.prefix}${this.baseEncode(bytes2)}`;
-      } else {
-        throw Error("Unknown type, must be binary type");
-      }
-    }
-  };
-  var Decoder2 = class {
-    /**
-     * @param {Base} name
-     * @param {Prefix} prefix
-     * @param {(text:string) => Uint8Array} baseDecode
-     */
-    constructor(name6, prefix, baseDecode) {
-      this.name = name6;
-      this.prefix = prefix;
-      if (prefix.codePointAt(0) === void 0) {
-        throw new Error("Invalid prefix character");
-      }
-      this.prefixCodePoint = /** @type {number} */
-      prefix.codePointAt(0);
-      this.baseDecode = baseDecode;
-    }
-    /**
-     * @param {string} text
-     */
-    decode(text2) {
-      if (typeof text2 === "string") {
-        if (text2.codePointAt(0) !== this.prefixCodePoint) {
-          throw Error(`Unable to decode multibase string ${JSON.stringify(text2)}, ${this.name} decoder only supports inputs prefixed with ${this.prefix}`);
-        }
-        return this.baseDecode(text2.slice(this.prefix.length));
-      } else {
-        throw Error("Can only multibase decode strings");
-      }
-    }
-    /**
-     * @template {string} OtherPrefix
-     * @param {API.UnibaseDecoder<OtherPrefix>|ComposedDecoder<OtherPrefix>} decoder
-     * @returns {ComposedDecoder<Prefix|OtherPrefix>}
-     */
-    or(decoder2) {
-      return or2(this, decoder2);
-    }
-  };
-  var ComposedDecoder2 = class {
-    /**
-     * @param {Decoders<Prefix>} decoders
-     */
-    constructor(decoders) {
-      this.decoders = decoders;
-    }
-    /**
-     * @template {string} OtherPrefix
-     * @param {API.UnibaseDecoder<OtherPrefix>|ComposedDecoder<OtherPrefix>} decoder
-     * @returns {ComposedDecoder<Prefix|OtherPrefix>}
-     */
-    or(decoder2) {
-      return or2(this, decoder2);
-    }
-    /**
-     * @param {string} input
-     * @returns {Uint8Array}
-     */
-    decode(input) {
-      const prefix = (
-        /** @type {Prefix} */
-        input[0]
-      );
-      const decoder2 = this.decoders[prefix];
-      if (decoder2) {
-        return decoder2.decode(input);
-      } else {
-        throw RangeError(`Unable to decode multibase string ${JSON.stringify(input)}, only inputs prefixed with ${Object.keys(this.decoders)} are supported`);
-      }
-    }
-  };
-  var or2 = (left, right) => new ComposedDecoder2(
-    /** @type {Decoders<L|R>} */
-    {
-      ...left.decoders || { [
-        /** @type API.UnibaseDecoder<L> */
-        left.prefix
-      ]: left },
-      ...right.decoders || { [
-        /** @type API.UnibaseDecoder<R> */
-        right.prefix
-      ]: right }
-    }
-  );
-  var Codec2 = class {
-    /**
-     * @param {Base} name
-     * @param {Prefix} prefix
-     * @param {(bytes:Uint8Array) => string} baseEncode
-     * @param {(text:string) => Uint8Array} baseDecode
-     */
-    constructor(name6, prefix, baseEncode, baseDecode) {
-      this.name = name6;
-      this.prefix = prefix;
-      this.baseEncode = baseEncode;
-      this.baseDecode = baseDecode;
-      this.encoder = new Encoder2(name6, prefix, baseEncode);
-      this.decoder = new Decoder2(name6, prefix, baseDecode);
-    }
-    /**
-     * @param {Uint8Array} input
-     */
-    encode(input) {
-      return this.encoder.encode(input);
-    }
-    /**
-     * @param {string} input
-     */
-    decode(input) {
-      return this.decoder.decode(input);
-    }
-  };
-  var from2 = ({ name: name6, prefix, encode: encode22, decode: decode29 }) => new Codec2(name6, prefix, encode22, decode29);
-  var baseX2 = ({ prefix, name: name6, alphabet }) => {
-    const { encode: encode22, decode: decode29 } = base_x_default2(alphabet, name6);
-    return from2({
-      prefix,
-      name: name6,
-      encode: encode22,
-      /**
-       * @param {string} text
-       */
-      decode: (text2) => coerce2(decode29(text2))
-    });
-  };
-  var decode11 = (string2, alphabet, bitsPerChar, name6) => {
-    const codes = {};
-    for (let i = 0; i < alphabet.length; ++i) {
-      codes[alphabet[i]] = i;
-    }
-    let end = string2.length;
-    while (string2[end - 1] === "=") {
-      --end;
-    }
-    const out = new Uint8Array(end * bitsPerChar / 8 | 0);
-    let bits = 0;
-    let buffer2 = 0;
-    let written = 0;
-    for (let i = 0; i < end; ++i) {
-      const value = codes[string2[i]];
-      if (value === void 0) {
-        throw new SyntaxError(`Non-${name6} character`);
-      }
-      buffer2 = buffer2 << bitsPerChar | value;
-      bits += bitsPerChar;
-      if (bits >= 8) {
-        bits -= 8;
-        out[written++] = 255 & buffer2 >> bits;
-      }
-    }
-    if (bits >= bitsPerChar || 255 & buffer2 << 8 - bits) {
-      throw new SyntaxError("Unexpected end of data");
-    }
-    return out;
-  };
-  var encode7 = (data, alphabet, bitsPerChar) => {
-    const pad = alphabet[alphabet.length - 1] === "=";
-    const mask = (1 << bitsPerChar) - 1;
-    let out = "";
-    let bits = 0;
-    let buffer2 = 0;
-    for (let i = 0; i < data.length; ++i) {
-      buffer2 = buffer2 << 8 | data[i];
-      bits += 8;
-      while (bits > bitsPerChar) {
-        bits -= bitsPerChar;
-        out += alphabet[mask & buffer2 >> bits];
-      }
-    }
-    if (bits) {
-      out += alphabet[mask & buffer2 << bitsPerChar - bits];
-    }
-    if (pad) {
-      while (out.length * bitsPerChar & 7) {
-        out += "=";
-      }
-    }
-    return out;
-  };
-  var rfc46482 = ({ name: name6, prefix, bitsPerChar, alphabet }) => {
-    return from2({
-      prefix,
-      name: name6,
-      encode(input) {
-        return encode7(input, alphabet, bitsPerChar);
-      },
-      decode(input) {
-        return decode11(input, alphabet, bitsPerChar, name6);
-      }
-    });
-  };
-
-  // node_modules/.pnpm/multiformats@11.0.2/node_modules/multiformats/src/bases/base58.js
-  var base58btc2 = baseX2({
-    name: "base58btc",
-    prefix: "z",
-    alphabet: "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
-  });
-  var base58flickr2 = baseX2({
-    name: "base58flickr",
-    prefix: "Z",
-    alphabet: "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
-  });
-
-  // node_modules/.pnpm/multiformats@11.0.2/node_modules/multiformats/src/bases/base32.js
-  var base322 = rfc46482({
-    prefix: "b",
-    name: "base32",
-    alphabet: "abcdefghijklmnopqrstuvwxyz234567",
-    bitsPerChar: 5
-  });
-  var base32upper2 = rfc46482({
-    prefix: "B",
-    name: "base32upper",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567",
-    bitsPerChar: 5
-  });
-  var base32pad2 = rfc46482({
-    prefix: "c",
-    name: "base32pad",
-    alphabet: "abcdefghijklmnopqrstuvwxyz234567=",
-    bitsPerChar: 5
-  });
-  var base32padupper2 = rfc46482({
-    prefix: "C",
-    name: "base32padupper",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567=",
-    bitsPerChar: 5
-  });
-  var base32hex2 = rfc46482({
-    prefix: "v",
-    name: "base32hex",
-    alphabet: "0123456789abcdefghijklmnopqrstuv",
-    bitsPerChar: 5
-  });
-  var base32hexupper2 = rfc46482({
-    prefix: "V",
-    name: "base32hexupper",
-    alphabet: "0123456789ABCDEFGHIJKLMNOPQRSTUV",
-    bitsPerChar: 5
-  });
-  var base32hexpad2 = rfc46482({
-    prefix: "t",
-    name: "base32hexpad",
-    alphabet: "0123456789abcdefghijklmnopqrstuv=",
-    bitsPerChar: 5
-  });
-  var base32hexpadupper2 = rfc46482({
-    prefix: "T",
-    name: "base32hexpadupper",
-    alphabet: "0123456789ABCDEFGHIJKLMNOPQRSTUV=",
-    bitsPerChar: 5
-  });
-  var base32z2 = rfc46482({
-    prefix: "h",
-    name: "base32z",
-    alphabet: "ybndrfg8ejkmcpqxot1uwisza345h769",
-    bitsPerChar: 5
-  });
-
-  // node_modules/.pnpm/multiformats@11.0.2/node_modules/multiformats/src/cid.js
-  var format2 = (link4, base3) => {
-    const { bytes: bytes2, version } = link4;
-    switch (version) {
-      case 0:
-        return toStringV02(
-          bytes2,
-          baseCache2(link4),
-          /** @type {API.MultibaseEncoder<"z">} */
-          base3 || base58btc2.encoder
-        );
-      default:
-        return toStringV12(
-          bytes2,
-          baseCache2(link4),
-          /** @type {API.MultibaseEncoder<Prefix>} */
-          base3 || base322.encoder
-        );
-    }
-  };
-  var cache2 = /* @__PURE__ */ new WeakMap();
-  var baseCache2 = (cid) => {
-    const baseCache3 = cache2.get(cid);
-    if (baseCache3 == null) {
-      const baseCache4 = /* @__PURE__ */ new Map();
-      cache2.set(cid, baseCache4);
-      return baseCache4;
-    }
-    return baseCache3;
-  };
-  var CID2 = class _CID {
-    /**
-     * @param {Version} version - Version of the CID
-     * @param {Format} code - Code of the codec content is encoded in, see https://github.com/multiformats/multicodec/blob/master/table.csv
-     * @param {API.MultihashDigest<Alg>} multihash - (Multi)hash of the of the content.
-     * @param {Uint8Array} bytes
-     *
-     */
-    constructor(version, code9, multihash, bytes2) {
-      this.code = code9;
-      this.version = version;
-      this.multihash = multihash;
-      this.bytes = bytes2;
-      this["/"] = bytes2;
-    }
-    /**
-     * Signalling `cid.asCID === cid` has been replaced with `cid['/'] === cid.bytes`
-     * please either use `CID.asCID(cid)` or switch to new signalling mechanism
-     *
-     * @deprecated
-     */
-    get asCID() {
-      return this;
-    }
-    // ArrayBufferView
-    get byteOffset() {
-      return this.bytes.byteOffset;
-    }
-    // ArrayBufferView
-    get byteLength() {
-      return this.bytes.byteLength;
-    }
-    /**
-     * @returns {CID<Data, API.DAG_PB, API.SHA_256, 0>}
-     */
-    toV0() {
-      switch (this.version) {
-        case 0: {
-          return (
-            /** @type {CID<Data, API.DAG_PB, API.SHA_256, 0>} */
-            this
-          );
-        }
-        case 1: {
-          const { code: code9, multihash } = this;
-          if (code9 !== DAG_PB_CODE2) {
-            throw new Error("Cannot convert a non dag-pb CID to CIDv0");
-          }
-          if (multihash.code !== SHA_256_CODE2) {
-            throw new Error("Cannot convert non sha2-256 multihash CID to CIDv0");
-          }
-          return (
-            /** @type {CID<Data, API.DAG_PB, API.SHA_256, 0>} */
-            _CID.createV0(
-              /** @type {API.MultihashDigest<API.SHA_256>} */
-              multihash
-            )
-          );
-        }
-        default: {
-          throw Error(
-            `Can not convert CID version ${this.version} to version 0. This is a bug please report`
-          );
-        }
-      }
-    }
-    /**
-     * @returns {CID<Data, Format, Alg, 1>}
-     */
-    toV1() {
-      switch (this.version) {
-        case 0: {
-          const { code: code9, digest: digest2 } = this.multihash;
-          const multihash = create2(code9, digest2);
-          return (
-            /** @type {CID<Data, Format, Alg, 1>} */
-            _CID.createV1(this.code, multihash)
-          );
-        }
-        case 1: {
-          return (
-            /** @type {CID<Data, Format, Alg, 1>} */
-            this
-          );
-        }
-        default: {
-          throw Error(
-            `Can not convert CID version ${this.version} to version 1. This is a bug please report`
-          );
-        }
-      }
-    }
-    /**
-     * @param {unknown} other
-     * @returns {other is CID<Data, Format, Alg, Version>}
-     */
-    equals(other) {
-      return _CID.equals(this, other);
-    }
-    /**
-     * @template {unknown} Data
-     * @template {number} Format
-     * @template {number} Alg
-     * @template {API.Version} Version
-     * @param {API.Link<Data, Format, Alg, Version>} self
-     * @param {unknown} other
-     * @returns {other is CID}
-     */
-    static equals(self2, other) {
-      const unknown2 = (
-        /** @type {{code?:unknown, version?:unknown, multihash?:unknown}} */
-        other
-      );
-      return unknown2 && self2.code === unknown2.code && self2.version === unknown2.version && equals4(self2.multihash, unknown2.multihash);
-    }
-    /**
-     * @param {API.MultibaseEncoder<string>} [base]
-     * @returns {string}
-     */
-    toString(base3) {
-      return format2(this, base3);
-    }
-    toJSON() {
-      return { "/": format2(this) };
-    }
-    link() {
-      return this;
-    }
-    get [Symbol.toStringTag]() {
-      return "CID";
-    }
-    // Legacy
-    [Symbol.for("nodejs.util.inspect.custom")]() {
-      return `CID(${this.toString()})`;
-    }
-    /**
-     * Takes any input `value` and returns a `CID` instance if it was
-     * a `CID` otherwise returns `null`. If `value` is instanceof `CID`
-     * it will return value back. If `value` is not instance of this CID
-     * class, but is compatible CID it will return new instance of this
-     * `CID` class. Otherwise returns null.
-     *
-     * This allows two different incompatible versions of CID library to
-     * co-exist and interop as long as binary interface is compatible.
-     *
-     * @template {unknown} Data
-     * @template {number} Format
-     * @template {number} Alg
-     * @template {API.Version} Version
-     * @template {unknown} U
-     * @param {API.Link<Data, Format, Alg, Version>|U} input
-     * @returns {CID<Data, Format, Alg, Version>|null}
-     */
-    static asCID(input) {
-      if (input == null) {
-        return null;
-      }
-      const value = (
-        /** @type {any} */
-        input
-      );
-      if (value instanceof _CID) {
-        return value;
-      } else if (value["/"] != null && value["/"] === value.bytes || value.asCID === value) {
-        const { version, code: code9, multihash, bytes: bytes2 } = value;
-        return new _CID(
-          version,
-          code9,
-          /** @type {API.MultihashDigest<Alg>} */
-          multihash,
-          bytes2 || encodeCID2(version, code9, multihash.bytes)
-        );
-      } else if (value[cidSymbol2] === true) {
-        const { version, multihash, code: code9 } = value;
-        const digest2 = (
-          /** @type {API.MultihashDigest<Alg>} */
-          decode10(multihash)
-        );
-        return _CID.create(version, code9, digest2);
-      } else {
-        return null;
-      }
-    }
-    /**
-     *
-     * @template {unknown} Data
-     * @template {number} Format
-     * @template {number} Alg
-     * @template {API.Version} Version
-     * @param {Version} version - Version of the CID
-     * @param {Format} code - Code of the codec content is encoded in, see https://github.com/multiformats/multicodec/blob/master/table.csv
-     * @param {API.MultihashDigest<Alg>} digest - (Multi)hash of the of the content.
-     * @returns {CID<Data, Format, Alg, Version>}
-     */
-    static create(version, code9, digest2) {
-      if (typeof code9 !== "number") {
-        throw new Error("String codecs are no longer supported");
-      }
-      if (!(digest2.bytes instanceof Uint8Array)) {
-        throw new Error("Invalid digest");
-      }
-      switch (version) {
-        case 0: {
-          if (code9 !== DAG_PB_CODE2) {
-            throw new Error(
-              `Version 0 CID must use dag-pb (code: ${DAG_PB_CODE2}) block encoding`
-            );
-          } else {
-            return new _CID(version, code9, digest2, digest2.bytes);
-          }
-        }
-        case 1: {
-          const bytes2 = encodeCID2(version, code9, digest2.bytes);
-          return new _CID(version, code9, digest2, bytes2);
-        }
-        default: {
-          throw new Error("Invalid version");
-        }
-      }
-    }
-    /**
-     * Simplified version of `create` for CIDv0.
-     *
-     * @template {unknown} [T=unknown]
-     * @param {API.MultihashDigest<typeof SHA_256_CODE>} digest - Multihash.
-     * @returns {CID<T, typeof DAG_PB_CODE, typeof SHA_256_CODE, 0>}
-     */
-    static createV0(digest2) {
-      return _CID.create(0, DAG_PB_CODE2, digest2);
-    }
-    /**
-     * Simplified version of `create` for CIDv1.
-     *
-     * @template {unknown} Data
-     * @template {number} Code
-     * @template {number} Alg
-     * @param {Code} code - Content encoding format code.
-     * @param {API.MultihashDigest<Alg>} digest - Miltihash of the content.
-     * @returns {CID<Data, Code, Alg, 1>}
-     */
-    static createV1(code9, digest2) {
-      return _CID.create(1, code9, digest2);
-    }
-    /**
-     * Decoded a CID from its binary representation. The byte array must contain
-     * only the CID with no additional bytes.
-     *
-     * An error will be thrown if the bytes provided do not contain a valid
-     * binary representation of a CID.
-     *
-     * @template {unknown} Data
-     * @template {number} Code
-     * @template {number} Alg
-     * @template {API.Version} Ver
-     * @param {API.ByteView<API.Link<Data, Code, Alg, Ver>>} bytes
-     * @returns {CID<Data, Code, Alg, Ver>}
-     */
-    static decode(bytes2) {
-      const [cid, remainder] = _CID.decodeFirst(bytes2);
-      if (remainder.length) {
-        throw new Error("Incorrect length");
-      }
-      return cid;
-    }
-    /**
-     * Decoded a CID from its binary representation at the beginning of a byte
-     * array.
-     *
-     * Returns an array with the first element containing the CID and the second
-     * element containing the remainder of the original byte array. The remainder
-     * will be a zero-length byte array if the provided bytes only contained a
-     * binary CID representation.
-     *
-     * @template {unknown} T
-     * @template {number} C
-     * @template {number} A
-     * @template {API.Version} V
-     * @param {API.ByteView<API.Link<T, C, A, V>>} bytes
-     * @returns {[CID<T, C, A, V>, Uint8Array]}
-     */
-    static decodeFirst(bytes2) {
-      const specs = _CID.inspectBytes(bytes2);
-      const prefixSize = specs.size - specs.multihashSize;
-      const multihashBytes = coerce2(
-        bytes2.subarray(prefixSize, prefixSize + specs.multihashSize)
-      );
-      if (multihashBytes.byteLength !== specs.multihashSize) {
-        throw new Error("Incorrect length");
-      }
-      const digestBytes = multihashBytes.subarray(
-        specs.multihashSize - specs.digestSize
-      );
-      const digest2 = new Digest2(
-        specs.multihashCode,
-        specs.digestSize,
-        digestBytes,
-        multihashBytes
-      );
-      const cid = specs.version === 0 ? _CID.createV0(
-        /** @type {API.MultihashDigest<API.SHA_256>} */
-        digest2
-      ) : _CID.createV1(specs.codec, digest2);
-      return [
-        /** @type {CID<T, C, A, V>} */
-        cid,
-        bytes2.subarray(specs.size)
-      ];
-    }
-    /**
-     * Inspect the initial bytes of a CID to determine its properties.
-     *
-     * Involves decoding up to 4 varints. Typically this will require only 4 to 6
-     * bytes but for larger multicodec code values and larger multihash digest
-     * lengths these varints can be quite large. It is recommended that at least
-     * 10 bytes be made available in the `initialBytes` argument for a complete
-     * inspection.
-     *
-     * @template {unknown} T
-     * @template {number} C
-     * @template {number} A
-     * @template {API.Version} V
-     * @param {API.ByteView<API.Link<T, C, A, V>>} initialBytes
-     * @returns {{ version:V, codec:C, multihashCode:A, digestSize:number, multihashSize:number, size:number }}
-     */
-    static inspectBytes(initialBytes) {
-      let offset = 0;
-      const next = () => {
-        const [i, length3] = decode9(initialBytes.subarray(offset));
-        offset += length3;
-        return i;
-      };
-      let version = (
-        /** @type {V} */
-        next()
-      );
-      let codec = (
-        /** @type {C} */
-        DAG_PB_CODE2
-      );
-      if (
-        /** @type {number} */
-        version === 18
-      ) {
-        version = /** @type {V} */
-        0;
-        offset = 0;
-      } else {
-        codec = /** @type {C} */
-        next();
-      }
-      if (version !== 0 && version !== 1) {
-        throw new RangeError(`Invalid CID version ${version}`);
-      }
-      const prefixSize = offset;
-      const multihashCode = (
-        /** @type {A} */
-        next()
-      );
-      const digestSize = next();
-      const size2 = offset + digestSize;
-      const multihashSize = size2 - prefixSize;
-      return { version, codec, multihashCode, digestSize, multihashSize, size: size2 };
-    }
-    /**
-     * Takes cid in a string representation and creates an instance. If `base`
-     * decoder is not provided will use a default from the configuration. It will
-     * throw an error if encoding of the CID is not compatible with supplied (or
-     * a default decoder).
-     *
-     * @template {string} Prefix
-     * @template {unknown} Data
-     * @template {number} Code
-     * @template {number} Alg
-     * @template {API.Version} Ver
-     * @param {API.ToString<API.Link<Data, Code, Alg, Ver>, Prefix>} source
-     * @param {API.MultibaseDecoder<Prefix>} [base]
-     * @returns {CID<Data, Code, Alg, Ver>}
-     */
-    static parse(source, base3) {
-      const [prefix, bytes2] = parseCIDtoBytes2(source, base3);
-      const cid = _CID.decode(bytes2);
-      if (cid.version === 0 && source[0] !== "Q") {
-        throw Error("Version 0 CID string must not include multibase prefix");
-      }
-      baseCache2(cid).set(prefix, source);
-      return cid;
-    }
-  };
-  var parseCIDtoBytes2 = (source, base3) => {
-    switch (source[0]) {
-      // CIDv0 is parsed differently
-      case "Q": {
-        const decoder2 = base3 || base58btc2;
-        return [
-          /** @type {Prefix} */
-          base58btc2.prefix,
-          decoder2.decode(`${base58btc2.prefix}${source}`)
-        ];
-      }
-      case base58btc2.prefix: {
-        const decoder2 = base3 || base58btc2;
-        return [
-          /** @type {Prefix} */
-          base58btc2.prefix,
-          decoder2.decode(source)
-        ];
-      }
-      case base322.prefix: {
-        const decoder2 = base3 || base322;
-        return [
-          /** @type {Prefix} */
-          base322.prefix,
-          decoder2.decode(source)
-        ];
-      }
-      default: {
-        if (base3 == null) {
-          throw Error(
-            "To parse non base32 or base58btc encoded CID multibase decoder must be provided"
-          );
-        }
-        return [
-          /** @type {Prefix} */
-          source[0],
-          base3.decode(source)
-        ];
-      }
-    }
-  };
-  var toStringV02 = (bytes2, cache3, base3) => {
-    const { prefix } = base3;
-    if (prefix !== base58btc2.prefix) {
-      throw Error(`Cannot string encode V0 in ${base3.name} encoding`);
-    }
-    const cid = cache3.get(prefix);
-    if (cid == null) {
-      const cid2 = base3.encode(bytes2).slice(1);
-      cache3.set(prefix, cid2);
-      return cid2;
-    } else {
-      return cid;
-    }
-  };
-  var toStringV12 = (bytes2, cache3, base3) => {
-    const { prefix } = base3;
-    const cid = cache3.get(prefix);
-    if (cid == null) {
-      const cid2 = base3.encode(bytes2);
-      cache3.set(prefix, cid2);
-      return cid2;
-    } else {
-      return cid;
-    }
-  };
+  // node_modules/.pnpm/multiformats@13.3.2/node_modules/multiformats/dist/src/link.js
   var DAG_PB_CODE2 = 112;
-  var SHA_256_CODE2 = 18;
-  var encodeCID2 = (version, code9, multihash) => {
-    const codeOffset = encodingLength2(version);
-    const hashOffset = codeOffset + encodingLength2(code9);
-    const bytes2 = new Uint8Array(hashOffset + multihash.byteLength);
-    encodeTo2(version, bytes2, 0);
-    encodeTo2(code9, bytes2, codeOffset);
-    bytes2.set(multihash, hashOffset);
-    return bytes2;
-  };
-  var cidSymbol2 = Symbol.for("@ipld/js-cid/CID");
-
-  // node_modules/.pnpm/multiformats@11.0.2/node_modules/multiformats/src/link.js
-  var DAG_PB_CODE3 = 112;
-  var createLegacy = (digest2) => CID2.create(0, DAG_PB_CODE3, digest2);
-  var create3 = (code9, digest2) => CID2.create(1, code9, digest2);
-  var isLink = (value) => {
+  function createLegacy(digest2) {
+    return CID.create(0, DAG_PB_CODE2, digest2);
+  }
+  function create2(code9, digest2) {
+    return CID.create(1, code9, digest2);
+  }
+  function isLink(value) {
     if (value == null) {
       return false;
     }
-    const withSlash = (
-      /** @type {{'/'?: Uint8Array, bytes: Uint8Array}} */
-      value
-    );
+    const withSlash = value;
     if (withSlash["/"] != null && withSlash["/"] === withSlash.bytes) {
       return true;
     }
-    const withAsCID = (
-      /** @type {{'asCID'?: unknown}} */
-      value
-    );
+    const withAsCID = value;
     if (withAsCID.asCID === value) {
       return true;
     }
     return false;
-  };
-  var parse = (source, base3) => CID2.parse(source, base3);
+  }
+  function parse(source, base2) {
+    return CID.parse(source, base2);
+  }
 
-  // node_modules/.pnpm/multiformats@11.0.2/node_modules/multiformats/src/hashes/identity.js
+  // node_modules/.pnpm/multiformats@13.3.2/node_modules/multiformats/dist/src/hashes/identity.js
   var code2 = 0;
   var name = "identity";
-  var encode8 = coerce2;
-  var digest = (input) => create2(code2, encode8(input));
-  var identity = { code: code2, name, encode: encode8, digest };
+  var encode6 = coerce;
+  function digest(input) {
+    return create(code2, encode6(input));
+  }
+  var identity = { code: code2, name, encode: encode6, digest };
 
-  // node_modules/.pnpm/multiformats@11.0.2/node_modules/multiformats/src/hashes/hasher.js
-  var from3 = ({ name: name6, code: code9, encode: encode22 }) => new Hasher(name6, code9, encode22);
+  // node_modules/.pnpm/multiformats@13.3.2/node_modules/multiformats/dist/src/hashes/hasher.js
+  function from2({ name: name6, code: code9, encode: encode20 }) {
+    return new Hasher(name6, code9, encode20);
+  }
   var Hasher = class {
-    /**
-     *
-     * @param {Name} name
-     * @param {Code} code
-     * @param {(input: Uint8Array) => Await<Uint8Array>} encode
-     */
-    constructor(name6, code9, encode22) {
+    name;
+    code;
+    encode;
+    constructor(name6, code9, encode20) {
       this.name = name6;
       this.code = code9;
-      this.encode = encode22;
+      this.encode = encode20;
     }
-    /**
-     * @param {Uint8Array} input
-     * @returns {Await<Digest.Digest<Code, number>>}
-     */
     digest(input) {
       if (input instanceof Uint8Array) {
         const result = this.encode(input);
-        return result instanceof Uint8Array ? create2(this.code, result) : result.then((digest2) => create2(this.code, digest2));
+        return result instanceof Uint8Array ? create(this.code, result) : result.then((digest2) => create(this.code, digest2));
       } else {
         throw Error("Unknown type, must be binary type");
       }
     }
   };
 
-  // node_modules/.pnpm/@ipld+dag-ucan@3.4.0/node_modules/@ipld/dag-ucan/src/did.js
+  // node_modules/.pnpm/@ipld+dag-ucan@3.4.5/node_modules/@ipld/dag-ucan/src/did.js
   var DID_PREFIX = "did:";
   var DID_PREFIX_SIZE = DID_PREFIX.length;
   var DID_KEY_PREFIX = `did:key:`;
@@ -3841,35 +2779,35 @@
   var BLS12381G1 = 234;
   var BLS12381G2 = 235;
   var DID_CORE = 3357;
-  var METHOD_OFFSET = varint_exports2.encodingLength(DID_CORE);
+  var METHOD_OFFSET = varint_exports.encodingLength(DID_CORE);
   var parse2 = (did2) => {
     if (!did2.startsWith(DID_PREFIX)) {
       throw new RangeError(`Invalid DID "${did2}", must start with 'did:'`);
     } else if (did2.startsWith(DID_KEY_PREFIX)) {
-      const key = base58btc2.decode(did2.slice(DID_KEY_PREFIX_SIZE));
-      return decode12(key);
+      const key = base58btc.decode(did2.slice(DID_KEY_PREFIX_SIZE));
+      return decode8(key);
     } else {
       const suffix = encode5(did2.slice(DID_PREFIX_SIZE));
       const bytes2 = new Uint8Array(suffix.byteLength + METHOD_OFFSET);
-      varint_exports2.encodeTo(DID_CORE, bytes2);
+      varint_exports.encodeTo(DID_CORE, bytes2);
       bytes2.set(suffix, METHOD_OFFSET);
       return new DID(bytes2);
     }
   };
-  var format3 = (id) => id.did();
-  var from4 = (principal) => {
+  var format2 = (id) => id.did();
+  var from3 = (principal) => {
     if (principal instanceof DID) {
       return principal;
     } else if (principal instanceof Uint8Array) {
-      return decode12(principal);
+      return decode8(principal);
     } else if (typeof principal === "string") {
       return parse2(principal);
     } else {
       return parse2(principal.did());
     }
   };
-  var decode12 = (bytes2) => {
-    const [code9] = varint_exports2.decode(bytes2);
+  var decode8 = (bytes2) => {
+    const [code9] = varint_exports.decode(bytes2);
     const { buffer: buffer2, byteOffset, byteLength } = bytes2;
     switch (code9) {
       case P256:
@@ -3895,7 +2833,7 @@
         );
     }
   };
-  var encode9 = (principal) => parse2(principal.did());
+  var encode7 = (principal) => parse2(principal.did());
   var DID = class extends Uint8Array {
     /**
      * @returns {ID}
@@ -3916,40 +2854,40 @@
      * @return {`did:key:${string}`}
      */
     did() {
-      return `did:key:${base58btc2.encode(this)}`;
+      return `did:key:${base58btc.encode(this)}`;
     }
   };
 
-  // node_modules/.pnpm/multiformats@11.0.2/node_modules/multiformats/src/codecs/raw.js
+  // node_modules/.pnpm/multiformats@13.3.2/node_modules/multiformats/dist/src/codecs/raw.js
   var code3 = 85;
 
-  // node_modules/.pnpm/multiformats@11.0.2/node_modules/multiformats/src/bases/base64.js
-  var base64 = rfc46482({
+  // node_modules/.pnpm/multiformats@13.3.2/node_modules/multiformats/dist/src/bases/base64.js
+  var base64 = rfc4648({
     prefix: "m",
     name: "base64",
     alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
     bitsPerChar: 6
   });
-  var base64pad = rfc46482({
+  var base64pad = rfc4648({
     prefix: "M",
     name: "base64pad",
     alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
     bitsPerChar: 6
   });
-  var base64url = rfc46482({
+  var base64url = rfc4648({
     prefix: "u",
     name: "base64url",
     alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_",
     bitsPerChar: 6
   });
-  var base64urlpad = rfc46482({
+  var base64urlpad = rfc4648({
     prefix: "U",
     name: "base64urlpad",
     alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_=",
     bitsPerChar: 6
   });
 
-  // node_modules/.pnpm/@ipld+dag-ucan@3.4.0/node_modules/@ipld/dag-ucan/src/signature.js
+  // node_modules/.pnpm/@ipld+dag-ucan@3.4.5/node_modules/@ipld/dag-ucan/src/signature.js
   var NON_STANDARD = 53248;
   var ES256K = 53479;
   var BLS12381G12 = 53482;
@@ -4012,7 +2950,7 @@
   };
   var Signature = class extends Uint8Array {
     get code() {
-      const [code9] = varint_exports2.decode(this);
+      const [code9] = varint_exports.decode(this);
       Object.defineProperties(this, { code: { value: code9 } });
       return (
         /** @type {A} */
@@ -4031,8 +2969,8 @@
     }
     get raw() {
       const { buffer: buffer2, byteOffset, size: size2, code: code9 } = this;
-      const codeSize = varint_exports2.encodingLength(code9);
-      const rawSize = varint_exports2.encodingLength(size2);
+      const codeSize = varint_exports.encodingLength(code9);
+      const rawSize = varint_exports.encodingLength(size2);
       const value = new Uint8Array(buffer2, byteOffset + codeSize + rawSize, size2);
       Object.defineProperties(this, { raw: { value } });
       return value;
@@ -4064,7 +3002,7 @@
   var algorithm = (signature) => {
     const { code: code9, raw, buffer: buffer2, byteOffset } = signature;
     if (code9 === NON_STANDARD) {
-      const offset = raw.byteLength + varint_exports2.encodingLength(code9) + varint_exports2.encodingLength(raw.byteLength);
+      const offset = raw.byteLength + varint_exports.encodingLength(code9) + varint_exports.encodingLength(raw.byteLength);
       const bytes2 = new Uint8Array(buffer2, byteOffset + offset);
       return decode7(bytes2);
     } else {
@@ -4072,19 +3010,19 @@
     }
   };
   var size = (signature) => {
-    const offset = varint_exports2.encodingLength(signature.code);
-    const [size2] = varint_exports2.decode(
+    const offset = varint_exports.encodingLength(signature.code);
+    const [size2] = varint_exports.decode(
       new Uint8Array(signature.buffer, signature.byteOffset + offset)
     );
     return size2;
   };
-  var create4 = (code9, raw) => {
+  var create3 = (code9, raw) => {
     const _ = codeName(code9);
-    const codeSize = varint_exports2.encodingLength(code9);
-    const rawSize = varint_exports2.encodingLength(raw.byteLength);
+    const codeSize = varint_exports.encodingLength(code9);
+    const rawSize = varint_exports.encodingLength(raw.byteLength);
     const signature = new Signature(codeSize + rawSize + raw.byteLength);
-    varint_exports2.encodeTo(code9, signature);
-    varint_exports2.encodeTo(raw.byteLength, signature, codeSize);
+    varint_exports.encodeTo(code9, signature);
+    varint_exports.encodeTo(raw.byteLength, signature, codeSize);
     signature.set(raw, codeSize + rawSize);
     Object.defineProperties(signature, {
       code: { value: code9 },
@@ -4094,24 +3032,24 @@
   };
   var createNamed = (name6, raw) => {
     const code9 = nameCode(name6);
-    return code9 === NON_STANDARD ? createNonStandard(name6, raw) : create4(code9, raw);
+    return code9 === NON_STANDARD ? createNonStandard(name6, raw) : create3(code9, raw);
   };
   var createNonStandard = (name6, raw) => {
     const code9 = NON_STANDARD;
-    const codeSize = varint_exports2.encodingLength(code9);
-    const rawSize = varint_exports2.encodingLength(raw.byteLength);
+    const codeSize = varint_exports.encodingLength(code9);
+    const rawSize = varint_exports.encodingLength(raw.byteLength);
     const nameBytes = encode5(name6);
     const signature = new Signature(
       codeSize + rawSize + raw.byteLength + nameBytes.byteLength
     );
-    varint_exports2.encodeTo(code9, signature);
-    varint_exports2.encodeTo(raw.byteLength, signature, codeSize);
+    varint_exports.encodeTo(code9, signature);
+    varint_exports.encodeTo(raw.byteLength, signature, codeSize);
     signature.set(raw, codeSize + rawSize);
     signature.set(nameBytes, codeSize + rawSize + raw.byteLength);
     return signature;
   };
   var view = (bytes2) => new Signature(bytes2.buffer, bytes2.byteOffset, bytes2.byteLength);
-  var decode13 = (bytes2) => {
+  var decode9 = (bytes2) => {
     if (!(bytes2 instanceof Uint8Array)) {
       throw new TypeError(
         `Can only decode Uint8Array into a Signature, instead got ${JSON.stringify(
@@ -4123,12 +3061,12 @@
     const { code: code9, algorithm: algorithm2, raw } = signature;
     return signature;
   };
-  var encode10 = (signature) => decode13(signature);
+  var encode8 = (signature) => decode9(signature);
   var toJSON2 = (signature) => ({
     "/": { bytes: base64.baseEncode(signature) }
   });
 
-  // node_modules/.pnpm/@ipld+dag-ucan@3.4.0/node_modules/@ipld/dag-ucan/src/schema.js
+  // node_modules/.pnpm/@ipld+dag-ucan@3.4.5/node_modules/@ipld/dag-ucan/src/schema.js
   var readPayload = (data) => readPayloadWith(data, {
     readPrincipal,
     readProof
@@ -4149,7 +3087,7 @@
   });
   var readSignature = (source) => {
     if (source instanceof Uint8Array) {
-      return decode13(source);
+      return decode9(source);
     } else {
       throw new TypeError(
         `Can only decode Uint8Array into a Signature, instead got ${JSON.stringify(
@@ -4202,7 +3140,7 @@
       return null;
     }
   };
-  var readArray = (input, read7, context) => Array.isArray(input) ? input.map((element, n) => read7(element, `${context}[${n}]`)) : ParseError.throw(`${context} must be an array`);
+  var readArray = (input, read6, context) => Array.isArray(input) ? input.map((element, n) => read6(element, `${context}[${n}]`)) : ParseError.throw(`${context} must be an array`);
   var readOptionalArray = (input, reader, context) => input === void 0 ? input : readArray(input, reader, context);
   var readStruct = (input, reader, context) => input != null && typeof input === "object" ? reader(input) : ParseError.throw(
     `${context} must be of type object, instead got ${input}`
@@ -4221,13 +3159,13 @@
     try {
       return parse(source);
     } catch (error4) {
-      return create3(code3, identity.digest(encode5(source)));
+      return create2(code3, identity.digest(encode5(source)));
     }
   };
-  var readPrincipal = (input, context) => decode12(readBytes(input, context));
+  var readPrincipal = (input, context) => decode8(readBytes(input, context));
   var readStringPrincipal = (source, context) => parse2(readString(source, context));
-  var readOptional = (source, read7, context = "Field") => source !== void 0 ? read7(source, context) : void 0;
-  var readNullable = (source, read7, context) => source === null ? null : read7(source, context);
+  var readOptional = (source, read6, context = "Field") => source !== void 0 ? read6(source, context) : void 0;
+  var readNullable = (source, read6, context) => source === null ? null : read6(source, context);
   var readString = (source, context = "Field") => typeof source === "string" ? source : fail(`${context} has invalid value ${source}`);
   var readBytes = (source, context) => source instanceof Uint8Array ? source : fail(
     `Expected ${context} to be Uint8Array, instead got ${JSON.stringify(
@@ -4260,7 +3198,7 @@
   };
   var fail = (reason) => ParseError.throw(reason);
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/json/encode.js
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/json/encode.js
   var JSONEncoder = class extends Array {
     constructor() {
       super();
@@ -4417,12 +3355,12 @@
     throw new Error(`${encodeErrPrefix} unexpected duplicate map keys, this is not supported`);
   }
   var defaultEncodeOptions2 = { addBreakTokens: true, mapSorter: mapSorter2 };
-  function encode11(data, options) {
+  function encode9(data, options) {
     options = Object.assign({}, defaultEncodeOptions2, options);
     return encodeCustom(data, new JSONEncoder(), options);
   }
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/json/decode.js
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/json/decode.js
   var Tokenizer = class {
     /**
      * @param {Uint8Array} data
@@ -4817,36 +3755,10 @@
       }
     }
   };
-  function decode14(data, options) {
+  function decode10(data, options) {
     options = Object.assign({ tokenizer: new Tokenizer(data, options) }, options);
     return decode(data, options);
   }
-
-  // node_modules/.pnpm/multiformats@13.3.1/node_modules/multiformats/dist/src/bases/base64.js
-  var base642 = rfc4648({
-    prefix: "m",
-    name: "base64",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
-    bitsPerChar: 6
-  });
-  var base64pad2 = rfc4648({
-    prefix: "M",
-    name: "base64pad",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
-    bitsPerChar: 6
-  });
-  var base64url2 = rfc4648({
-    prefix: "u",
-    name: "base64url",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_",
-    bitsPerChar: 6
-  });
-  var base64urlpad2 = rfc4648({
-    prefix: "U",
-    name: "base64urlpad",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_=",
-    bitsPerChar: 6
-  });
 
   // node_modules/.pnpm/@ipld+dag-json@10.2.3/node_modules/@ipld/dag-json/src/index.js
   function toByteView2(buf2) {
@@ -4874,7 +3786,7 @@
     ];
   }
   function bytesEncoder(bytes2) {
-    const bytesString = base642.encode(bytes2).slice(1);
+    const bytesString = base64.encode(bytes2).slice(1);
     return [
       new Token(Type.map, Infinity, 1),
       new Token(Type.string, "/", 1),
@@ -4982,7 +3894,7 @@
                     throw new Error("Invalid encoded Bytes form");
                   }
                 }
-                const bytes2 = base642.decode(`m${innerValueToken.value}`);
+                const bytes2 = base64.decode(`m${innerValueToken.value}`);
                 return new Token(Type.bytes, bytes2, innerValueToken.value.length);
               }
               this.tokenBuffer.push(innerValueToken);
@@ -5011,18 +3923,18 @@
     tags: []
   };
   decodeOptions2.tags[42] = CID.parse;
-  var encode12 = (node) => encode11(node, encodeOptions2);
-  var decode15 = (data) => {
+  var encode10 = (node) => encode9(node, encodeOptions2);
+  var decode11 = (data) => {
     const buf2 = toByteView2(data);
     const options = Object.assign(decodeOptions2, { tokenizer: new DagJsonTokenizer(buf2, decodeOptions2) });
-    return decode14(buf2, options);
+    return decode10(buf2, options);
   };
   var utf8Decoder = new TextDecoder();
-  var parse3 = (data) => decode15(utf8Encoder.encode(data));
+  var parse3 = (data) => decode11(utf8Encoder.encode(data));
   var utf8Encoder = new TextEncoder();
 
-  // node_modules/.pnpm/@ipld+dag-ucan@3.4.0/node_modules/@ipld/dag-ucan/src/formatter.js
-  var format4 = (model) => {
+  // node_modules/.pnpm/@ipld+dag-ucan@3.4.5/node_modules/@ipld/dag-ucan/src/formatter.js
+  var format3 = (model) => {
     const header = formatHeader(model.v, model.s.algorithm);
     const payload = formatPayload(model);
     const signature = formatSignature(model.s);
@@ -5035,14 +3947,14 @@
   var formatHeader = (version, alg) => base64url.baseEncode(encodeHeader(version, alg));
   var formatPayload = (data) => base64url.baseEncode(encodePayload(data));
   var formatSignature = (signature) => base64url.baseEncode(signature.raw);
-  var encodeHeader = (v, alg) => encode12({
+  var encodeHeader = (v, alg) => encode10({
     alg,
     ucv: v,
     typ: "JWT"
   });
-  var encodePayload = (data) => encode12({
-    iss: format3(data.iss),
-    aud: format3(data.aud),
+  var encodePayload = (data) => encode10({
+    iss: format2(data.iss),
+    aud: format2(data.aud),
     att: data.att,
     exp: data.exp,
     prf: data.prf.map(encodeProof),
@@ -5056,8 +3968,8 @@
     proof.toString()
   );
 
-  // node_modules/.pnpm/@ipld+dag-ucan@3.4.0/node_modules/@ipld/dag-ucan/src/view.js
-  var toJSON3 = (data) => JSON.parse(decode7(encode12(data)));
+  // node_modules/.pnpm/@ipld+dag-ucan@3.4.5/node_modules/@ipld/dag-ucan/src/view.js
+  var toJSON3 = (data) => JSON.parse(decode7(encode10(data)));
   var View = class {
     /**
      * @param {UCAN.UCAN<C>} model
@@ -5069,10 +3981,10 @@
       return this.model.v;
     }
     get issuer() {
-      return from4(this.model.iss);
+      return from3(this.model.iss);
     }
     get audience() {
-      return from4(this.model.aud);
+      return from3(this.model.aud);
     }
     /**
      * @returns {C}
@@ -5170,10 +4082,10 @@
     }
   };
 
-  // node_modules/.pnpm/@ipld+dag-ucan@3.4.0/node_modules/@ipld/dag-ucan/src/codec/cbor.js
+  // node_modules/.pnpm/@ipld+dag-ucan@3.4.5/node_modules/@ipld/dag-ucan/src/codec/cbor.js
   var code4 = code;
-  var from5 = (model) => new CBORView(model);
-  var encode13 = (model) => {
+  var from4 = (model) => new CBORView(model);
+  var encode11 = (model) => {
     const { fct, nnc, nbf, ...payload } = readPayload(model);
     return (
       /** @type {Uint8Array} */
@@ -5191,7 +4103,7 @@
   };
   var encodeSignature = (signature, context) => {
     try {
-      return encode10(signature);
+      return encode8(signature);
     } catch (cause) {
       throw new Error(
         `Expected signature ${context}, instead got ${JSON.stringify(signature)}`,
@@ -5200,7 +4112,7 @@
       );
     }
   };
-  var decode16 = (bytes2) => {
+  var decode12 = (bytes2) => {
     const model = decode6(bytes2);
     return new CBORView({
       ...readPayload(model),
@@ -5209,18 +4121,19 @@
     });
   };
   var CBORView = class extends View {
+    /** @type {UCAN.MulticodecCode<typeof code, "CBOR">} */
     get code() {
       return code4;
     }
     format() {
-      return format4(this.model);
+      return format3(this.model);
     }
     encode() {
-      return encode13(this.model);
+      return encode11(this.model);
     }
   };
 
-  // node_modules/.pnpm/@ipld+dag-ucan@3.4.0/node_modules/@ipld/dag-ucan/src/parser.js
+  // node_modules/.pnpm/@ipld+dag-ucan@3.4.5/node_modules/@ipld/dag-ucan/src/parser.js
   var parse4 = (jwt) => {
     const segments = jwt.split(".");
     const [header, payload, signature] = segments.length === 3 ? segments : fail(
@@ -5234,7 +4147,7 @@
     };
   };
   var parseHeader = (header) => {
-    const { ucv, alg, typ } = decode15(base64url.baseDecode(header));
+    const { ucv, alg, typ } = decode11(base64url.baseDecode(header));
     return {
       typ: readLiteral(typ, "JWT", "typ"),
       ucv: readVersion(ucv, "ucv"),
@@ -5242,21 +4155,21 @@
     };
   };
   var parsePayload = (source) => {
-    const payload = decode15(base64url.baseDecode(source));
+    const payload = decode11(base64url.baseDecode(source));
     return readJWTPayload(payload);
   };
 
-  // node_modules/.pnpm/@ipld+dag-ucan@3.4.0/node_modules/@ipld/dag-ucan/src/codec/jwt.js
-  var from6 = (model) => new JWTView(model);
-  var decode17 = (bytes2) => {
+  // node_modules/.pnpm/@ipld+dag-ucan@3.4.5/node_modules/@ipld/dag-ucan/src/codec/jwt.js
+  var from5 = (model) => new JWTView(model);
+  var decode13 = (bytes2) => {
     const jwt = (
       /** @type {UCAN.JWT<C>} */
       decode7(bytes2)
     );
     return new JWTView({ ...parse4(jwt), jwt });
   };
-  var encode14 = ({ jwt }) => encode5(jwt);
-  var format5 = ({ jwt }) => jwt;
+  var encode12 = ({ jwt }) => encode5(jwt);
+  var format4 = ({ jwt }) => jwt;
   var JWTView = class extends View {
     /**
      * @param {UCAN.FromJWT<C>} model
@@ -5265,46 +4178,44 @@
       super(model);
       this.model = model;
     }
+    /** @type {UCAN.MulticodecCode<typeof code, "Raw">} */
     get code() {
       return code3;
     }
     format() {
-      return format5(this.model);
+      return format4(this.model);
     }
     encode() {
-      return encode14(this.model);
+      return encode12(this.model);
     }
   };
 
-  // node_modules/.pnpm/multiformats@11.0.2/node_modules/multiformats/src/hashes/sha2-browser.js
-  var sha = (name6) => (
-    /**
-     * @param {Uint8Array} data
-     */
-    async (data) => new Uint8Array(await crypto.subtle.digest(name6, data))
-  );
-  var sha256 = from3({
+  // node_modules/.pnpm/multiformats@13.3.2/node_modules/multiformats/dist/src/hashes/sha2-browser.js
+  function sha(name6) {
+    return async (data) => new Uint8Array(await crypto.subtle.digest(name6, data));
+  }
+  var sha256 = from2({
     name: "sha2-256",
     code: 18,
     encode: sha("SHA-256")
   });
-  var sha512 = from3({
+  var sha512 = from2({
     name: "sha2-512",
     code: 19,
     encode: sha("SHA-512")
   });
 
-  // node_modules/.pnpm/@ipld+dag-ucan@3.4.0/node_modules/@ipld/dag-ucan/src/lib.js
+  // node_modules/.pnpm/@ipld+dag-ucan@3.4.5/node_modules/@ipld/dag-ucan/src/lib.js
   var VERSION = "0.9.1";
   var name2 = "dag-ucan";
   var code5 = code4;
   var defaultHasher = sha256;
-  var encode15 = (ucan) => ucan.jwt ? encode14(ucan) : encode13(ucan);
-  var decode18 = (bytes2) => {
+  var encode13 = (ucan) => ucan.jwt ? encode12(ucan) : encode11(ucan);
+  var decode14 = (bytes2) => {
     try {
-      return decode16(bytes2);
+      return decode12(bytes2);
     } catch (_) {
-      return decode17(
+      return decode13(
         /** @type {UCAN.ByteView<UCAN.FromJWT<C>>} */
         bytes2
       );
@@ -5315,22 +4226,22 @@
     return cid;
   };
   var write = async (ucan, { hasher = defaultHasher } = {}) => {
-    const [code9, bytes2] = ucan.jwt ? [code3, encode14(ucan)] : [code4, encode13(ucan)];
+    const [code9, bytes2] = ucan.jwt ? [code3, encode12(ucan)] : [code4, encode11(ucan)];
     const digest2 = await hasher.digest(bytes2);
     return {
       bytes: bytes2,
-      cid: create3(code9, digest2),
+      cid: create2(code9, digest2),
       data: ucan
     };
   };
   var parse5 = (jwt) => {
     const model = parse4(jwt);
-    return format4(model) === jwt ? from5(model) : from6({ ...model, jwt: (
+    return format3(model) === jwt ? from4(model) : from5({ ...model, jwt: (
       /** @type {UCAN.JWT<C>} */
       jwt
     ) });
   };
-  var format6 = (ucan) => ucan.jwt ? format5(ucan) : format4(ucan);
+  var format5 = (ucan) => ucan.jwt ? format4(ucan) : format3(ucan);
   var issue = async ({
     issuer,
     audience,
@@ -5354,14 +4265,14 @@
       nnc: nonce
     });
     const payload = encodeSignaturePayload(data, v, issuer.signatureAlgorithm);
-    return from5({
+    return from4({
       ...data,
       v,
       s: await issuer.sign(payload)
     });
   };
   var encodeSignaturePayload = (payload, version, algorithm2) => encode5(formatSignPayload(payload, version, algorithm2));
-  var verifySignature = (ucan, verifier) => format3(ucan.issuer) === verifier.did() && verifier.verify(
+  var verifySignature = (ucan, verifier) => format2(ucan.issuer) === verifier.did() && verifier.verify(
     encodeSignaturePayload(ucan.model, ucan.model.v, ucan.signature.algorithm),
     ucan.signature
   );
@@ -5369,7 +4280,7 @@
   var isTooEarly = (ucan) => ucan.notBefore != null && now() <= ucan.notBefore;
   var now = () => Math.floor(Date.now() / 1e3);
 
-  // node_modules/.pnpm/@ucanto+core@10.0.1/node_modules/@ucanto/core/src/cbor.js
+  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/cbor.js
   var prepare = (data, seen) => {
     if (seen.has(data)) {
       throw new TypeError("Can not encode circular structure");
@@ -5420,23 +4331,23 @@
     }
     return data;
   };
-  var encode16 = (data) => (
+  var encode14 = (data) => (
     /** @type {CBOR.ByteView<T>} */
     encode4(prepare(data, /* @__PURE__ */ new Set()))
   );
   var link2 = async (bytes2, { hasher = sha256 } = {}) => {
     return (
       /** @type {API.Link<T, typeof CBOR.code>} */
-      create3(code, await hasher.digest(bytes2))
+      create2(code, await hasher.digest(bytes2))
     );
   };
   var write2 = async (data, options) => {
-    const bytes2 = encode16(data);
+    const bytes2 = encode14(data);
     const cid = await link2(bytes2, options);
     return { cid, bytes: bytes2 };
   };
 
-  // node_modules/.pnpm/@ucanto+core@10.0.1/node_modules/@ucanto/core/src/dag.js
+  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/dag.js
   var EMBED_CODE = identity.code;
   var get = (cid, store, fallback) => {
     if (cid.multihash.code === EMBED_CODE) {
@@ -5452,8 +4363,8 @@
     throw new Error(`Block for the ${link4} is not found`);
   };
 
-  // node_modules/.pnpm/@ipld+car@5.3.3/node_modules/@ipld/car/src/decoder-common.js
-  var import_varint3 = __toESM(require_varint(), 1);
+  // node_modules/.pnpm/@ipld+car@5.4.0/node_modules/@ipld/car/src/decoder-common.js
+  var import_varint2 = __toESM(require_varint(), 1);
   var CIDV0_BYTES = {
     SHA2_256: 18,
     LENGTH: 32,
@@ -5467,10 +4378,10 @@
     if (!bytes2.length) {
       throw new Error("Unexpected end of data");
     }
-    const i = import_varint3.default.decode(bytes2);
+    const i = import_varint2.default.decode(bytes2);
     seeker.seek(
       /** @type {number} */
-      import_varint3.default.decode.bytes
+      import_varint2.default.decode.bytes
     );
     return i;
   }
@@ -5491,21 +4402,21 @@
     return header;
   }
   function getMultihashLength(bytes2) {
-    import_varint3.default.decode(bytes2);
+    import_varint2.default.decode(bytes2);
     const codeLength = (
       /** @type {number} */
-      import_varint3.default.decode.bytes
+      import_varint2.default.decode.bytes
     );
-    const length3 = import_varint3.default.decode(bytes2.subarray(import_varint3.default.decode.bytes));
+    const length2 = import_varint2.default.decode(bytes2.subarray(import_varint2.default.decode.bytes));
     const lengthLength = (
       /** @type {number} */
-      import_varint3.default.decode.bytes
+      import_varint2.default.decode.bytes
     );
-    const mhLength = codeLength + lengthLength + length3;
+    const mhLength = codeLength + lengthLength + length2;
     return mhLength;
   }
 
-  // node_modules/.pnpm/@ipld+car@5.3.3/node_modules/@ipld/car/src/header-validator.js
+  // node_modules/.pnpm/@ipld+car@5.4.0/node_modules/@ipld/car/src/header-validator.js
   var Kinds = {
     Null: (
       /** @returns {undefined|null} */
@@ -5727,13 +4638,13 @@
     toRepresentation: Reprs.CarV1HeaderOrV2Pragma
   };
 
-  // node_modules/.pnpm/@ipld+car@5.3.3/node_modules/@ipld/car/src/buffer-decoder.js
+  // node_modules/.pnpm/@ipld+car@5.4.0/node_modules/@ipld/car/src/buffer-decoder.js
   function readHeader(reader, strictVersion) {
-    const length3 = decodeVarint(reader.upTo(8), reader);
-    if (length3 === 0) {
+    const length2 = decodeVarint(reader.upTo(8), reader);
+    if (length2 === 0) {
       throw new Error("Invalid CAR header (zero length)");
     }
-    const header = reader.exactly(length3, true);
+    const header = reader.exactly(length2, true);
     const block = decode6(header);
     if (CarV1HeaderOrV2Pragma.toTyped(block) === void 0) {
       throw new Error("Invalid CAR header format");
@@ -5773,14 +4684,14 @@
   }
   function readBlockHead(reader) {
     const start = reader.pos;
-    let length3 = decodeVarint(reader.upTo(8), reader);
-    if (length3 === 0) {
+    let length2 = decodeVarint(reader.upTo(8), reader);
+    if (length2 === 0) {
       throw new Error("Invalid CAR section (zero length)");
     }
-    length3 += reader.pos - start;
+    length2 += reader.pos - start;
     const cid = readCid(reader);
-    const blockLength2 = length3 - Number(reader.pos - start);
-    return { cid, length: length3, blockLength: blockLength2 };
+    const blockLength2 = length2 - Number(reader.pos - start);
+    return { cid, length: length2, blockLength: blockLength2 };
   }
   function fromBytes(bytes2) {
     let reader = bytesReader(bytes2);
@@ -5802,21 +4713,21 @@
   function bytesReader(bytes2) {
     let pos = 0;
     return {
-      upTo(length3) {
-        return bytes2.subarray(pos, pos + Math.min(length3, bytes2.length - pos));
+      upTo(length2) {
+        return bytes2.subarray(pos, pos + Math.min(length2, bytes2.length - pos));
       },
-      exactly(length3, seek = false) {
-        if (length3 > bytes2.length - pos) {
+      exactly(length2, seek = false) {
+        if (length2 > bytes2.length - pos) {
           throw new Error("Unexpected end of data");
         }
-        const out = bytes2.subarray(pos, pos + length3);
+        const out = bytes2.subarray(pos, pos + length2);
         if (seek) {
-          pos += length3;
+          pos += length2;
         }
         return out;
       },
-      seek(length3) {
-        pos += length3;
+      seek(length2) {
+        pos += length2;
       },
       get pos() {
         return pos;
@@ -5826,26 +4737,26 @@
   function limitReader(reader, byteLimit) {
     let bytesRead = 0;
     return {
-      upTo(length3) {
-        let bytes2 = reader.upTo(length3);
+      upTo(length2) {
+        let bytes2 = reader.upTo(length2);
         if (bytes2.length + bytesRead > byteLimit) {
           bytes2 = bytes2.subarray(0, byteLimit - bytesRead);
         }
         return bytes2;
       },
-      exactly(length3, seek = false) {
-        const bytes2 = reader.exactly(length3, seek);
+      exactly(length2, seek = false) {
+        const bytes2 = reader.exactly(length2, seek);
         if (bytes2.length + bytesRead > byteLimit) {
           throw new Error("Unexpected end of data");
         }
         if (seek) {
-          bytesRead += length3;
+          bytesRead += length2;
         }
         return bytes2;
       },
-      seek(length3) {
-        bytesRead += length3;
-        reader.seek(length3);
+      seek(length2) {
+        bytesRead += length2;
+        reader.seek(length2);
       },
       get pos() {
         return reader.pos;
@@ -5853,7 +4764,7 @@
     };
   }
 
-  // node_modules/.pnpm/@ipld+car@5.3.3/node_modules/@ipld/car/src/buffer-reader-browser.js
+  // node_modules/.pnpm/@ipld+car@5.4.0/node_modules/@ipld/car/src/buffer-reader-browser.js
   var CarBufferReader = class _CarBufferReader {
     /**
      * @constructs CarBufferReader
@@ -5958,7 +4869,7 @@
     }
   };
 
-  // node_modules/.pnpm/cborg@4.2.7/node_modules/cborg/lib/length.js
+  // node_modules/.pnpm/cborg@4.2.8/node_modules/cborg/lib/length.js
   var cborEncoders2 = makeCborEncoders();
   var defaultEncodeOptions3 = {
     float64: false,
@@ -5980,8 +4891,8 @@
     }
   }
 
-  // node_modules/.pnpm/@ipld+car@5.3.3/node_modules/@ipld/car/src/buffer-writer.js
-  var import_varint4 = __toESM(require_varint(), 1);
+  // node_modules/.pnpm/@ipld+car@5.4.0/node_modules/@ipld/car/src/buffer-writer.js
+  var import_varint3 = __toESM(require_varint(), 1);
   var CarBufferWriter = class {
     /**
      * @param {Uint8Array} bytes
@@ -6049,11 +4960,11 @@
   };
   var blockLength = ({ cid, bytes: bytes2 }) => {
     const size2 = cid.bytes.byteLength + bytes2.byteLength;
-    return import_varint4.default.encodingLength(size2) + size2;
+    return import_varint3.default.encodingLength(size2) + size2;
   };
   var addBlock = (writer, { cid, bytes: bytes2 }) => {
     const byteLength = cid.bytes.byteLength + bytes2.byteLength;
-    const size2 = import_varint4.default.encode(byteLength);
+    const size2 = import_varint3.default.encode(byteLength);
     if (writer.byteOffset + size2.length + byteLength > writer.bytes.byteLength) {
       throw new RangeError("Buffer has no capacity for this block");
     } else {
@@ -6066,7 +4977,7 @@
     const { resize = false } = options;
     const { roots, bytes: bytes2, byteOffset, headerSize } = writer;
     const headerBytes = encode4({ version: 1, roots });
-    const varintBytes = import_varint4.default.encode(headerBytes.length);
+    const varintBytes = import_varint3.default.encode(headerBytes.length);
     const size2 = varintBytes.length + headerBytes.byteLength;
     const offset = headerSize - size2;
     if (offset === 0) {
@@ -6091,9 +5002,9 @@ You can use close({ resize: true }) to resize header`);
     writer.bytes.set(bytes2, writer.byteOffset);
     writer.byteOffset += bytes2.length;
   };
-  var writeHeader = ({ bytes: bytes2 }, varint5, header) => {
-    bytes2.set(varint5);
-    bytes2.set(header, varint5.length);
+  var writeHeader = ({ bytes: bytes2 }, varint4, header) => {
+    bytes2.set(varint4);
+    bytes2.set(header, varint4.length);
   };
   var headerPreludeTokens = [
     new Token(Type.map, 2),
@@ -6109,8 +5020,8 @@ You can use close({ resize: true }) to resize header`);
       tokens.push(CID_TAG);
       tokens.push(new Token(Type.bytes, { length: rootLength + 1 }));
     }
-    const length3 = tokensToLength(tokens);
-    return import_varint4.default.encodingLength(length3) + length3;
+    const length2 = tokensToLength(tokens);
+    return import_varint3.default.encodingLength(length2) + length2;
   };
   var headerLength = ({ roots }) => calculateHeaderLength(roots.map((cid) => cid.bytes.byteLength));
   var createWriter = (buffer2, options = {}) => {
@@ -6128,7 +5039,7 @@ You can use close({ resize: true }) to resize header`);
     return writer;
   };
 
-  // node_modules/.pnpm/@ucanto+core@10.0.1/node_modules/@ucanto/core/src/car.js
+  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/car.js
   var Writer = class {
     /**
      * @param {API.IPLDBlock[]} blocks
@@ -6144,7 +5055,7 @@ You can use close({ resize: true }) to resize header`);
      */
     write(...blocks) {
       for (const block of blocks) {
-        const id = block.cid.toString(base322);
+        const id = block.cid.toString(base32);
         if (!this.written.has(id)) {
           this.blocks.push(block);
           this.byteLength += blockLength(
@@ -6162,7 +5073,7 @@ You can use close({ resize: true }) to resize header`);
     flush(...rootBlocks) {
       const roots = [];
       for (const block of rootBlocks.reverse()) {
-        const id = block.cid.toString(base322);
+        const id = block.cid.toString(base32);
         if (!this.written.has(id)) {
           this.blocks.unshift(block);
           this.byteLength += blockLength({
@@ -6192,14 +5103,14 @@ You can use close({ resize: true }) to resize header`);
       return writer.close();
     }
   };
-  var encode17 = ({ roots = [], blocks }) => {
+  var encode15 = ({ roots = [], blocks }) => {
     const writer = new Writer();
     if (blocks) {
       writer.write(...blocks.values());
     }
     return writer.flush(...roots);
   };
-  var decode19 = (bytes2) => {
+  var decode15 = (bytes2) => {
     const reader = CarBufferReader.fromBytes(bytes2);
     const roots = [];
     const blocks = /* @__PURE__ */ new Map();
@@ -6218,7 +5129,7 @@ You can use close({ resize: true }) to resize header`);
     return { roots, blocks };
   };
 
-  // node_modules/.pnpm/@ucanto+core@10.0.1/node_modules/@ucanto/core/src/schema.js
+  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/schema.js
   var schema_exports3 = {};
   __export(schema_exports3, {
     API: () => API,
@@ -6233,6 +5144,7 @@ You can use close({ resize: true }) to resize header`);
     bytes: () => bytes,
     dictionary: () => dictionary,
     did: () => match3,
+    didBytes: () => matchBytes,
     endsWith: () => endsWith,
     enum: () => createEnum,
     error: () => error2,
@@ -6249,7 +5161,7 @@ You can use close({ resize: true }) to resize header`);
     number: () => number,
     ok: () => ok,
     optional: () => optional,
-    or: () => or3,
+    or: () => or2,
     refine: () => refine,
     startsWith: () => startsWith,
     string: () => string,
@@ -6264,16 +5176,16 @@ You can use close({ resize: true }) to resize header`);
     variant: () => variant
   });
 
-  // node_modules/.pnpm/@ucanto+core@10.0.1/node_modules/@ucanto/core/src/schema/uri.js
+  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/schema/uri.js
   var uri_exports = {};
   __export(uri_exports, {
-    from: () => from7,
+    from: () => from6,
     match: () => match,
-    read: () => read3,
+    read: () => read2,
     uri: () => uri
   });
 
-  // node_modules/.pnpm/@ucanto+core@10.0.1/node_modules/@ucanto/core/src/result.js
+  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/result.js
   var ok = (value) => {
     if (value == null) {
       throw new TypeError(`ok(${value}) is not allowed, consider ok({}) instead`);
@@ -6304,7 +5216,7 @@ You can use close({ resize: true }) to resize header`);
     }
   };
 
-  // node_modules/.pnpm/@ucanto+core@10.0.1/node_modules/@ucanto/core/src/schema/schema.js
+  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/schema/schema.js
   var API = class {
     /**
      * @param {Settings} settings
@@ -6381,7 +5293,7 @@ You can use close({ resize: true }) to resize header`);
      * @returns {Schema.Schema<T | U, I>}
      */
     or(schema5) {
-      return or3(this, schema5);
+      return or2(this, schema5);
     }
     /**
      * @template U
@@ -6719,7 +5631,7 @@ You can use close({ resize: true }) to resize header`);
     }
   };
   var union = (variants) => new Union(variants);
-  var or3 = (left, right) => union([left, right]);
+  var or2 = (left, right) => union([left, right]);
   var Intersection = class extends API {
     /**
      * @param {I} input
@@ -6814,8 +5726,8 @@ You can use close({ resize: true }) to resize header`);
      * @param {{base:Schema.Reader<T, I>, schema:Schema.Reader<O, T>}} settings
      * @returns {Schema.ReadResult<O>}
      */
-    readWith(input, { base: base3, schema: schema5 }) {
-      const result = base3.read(input);
+    readWith(input, { base: base2, schema: schema5 }) {
+      const result = base2.read(input);
       return result.error ? result : schema5.read(result.ok);
     }
     toString() {
@@ -6980,8 +5892,8 @@ You can use close({ resize: true }) to resize header`);
      * @param {{base:Schema.Reader<T, I>, schema:Schema.Reader<O, T>}} settings
      * @returns {Schema.ReadResult<T & O>}
      */
-    readWith(input, { base: base3, schema: schema5 }) {
-      const result = base3.read(input);
+    readWith(input, { base: base2, schema: schema5 }) {
+      const result = base2.read(input);
       return result.error ? result : (
         /** @type {Schema.ReadResult<T & O>} */
         schema5.read(result.ok)
@@ -7065,15 +5977,15 @@ You can use close({ resize: true }) to resize header`);
      * @param {I} input
      * @param {{ base: Schema.Reader<T, I>, schema: Schema.Reader<U, T> }} settings
      */
-    readWith(input, { base: base3, schema: schema5 }) {
-      const result = base3.read(input);
+    readWith(input, { base: base2, schema: schema5 }) {
+      const result = base2.read(input);
       return result.error ? result : schema5.read(result.ok);
     }
     toString() {
       return `${this.settings.base}.refine(${this.settings.schema})`;
     }
   };
-  var refine = (base3, schema5) => new Refine({ base: base3, schema: schema5 });
+  var refine = (base2, schema5) => new Refine({ base: base2, schema: schema5 });
   var Literal = class extends API {
     /**
      * @param {I} input
@@ -7432,7 +6344,7 @@ You can use close({ resize: true }) to resize header`);
 ${indent3}`)}`;
   var li = (message) => indent(`- ${message}`);
 
-  // node_modules/.pnpm/@ucanto+core@10.0.1/node_modules/@ucanto/core/src/schema/uri.js
+  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/schema/uri.js
   var URISchema = class extends API {
     /**
      * @param {unknown} input
@@ -7462,24 +6374,24 @@ ${indent3}`)}`;
   };
   var schema = new URISchema({});
   var uri = () => schema;
-  var read3 = (input) => schema.read(input);
+  var read2 = (input) => schema.read(input);
   var match = (options) => new URISchema(options);
-  var from7 = (input) => (
+  var from6 = (input) => (
     /** @type {API.URI<`${Scheme}:`>} */
     schema.from(input)
   );
 
-  // node_modules/.pnpm/@ucanto+core@10.0.1/node_modules/@ucanto/core/src/schema/link.js
+  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/schema/link.js
   var link_exports2 = {};
   __export(link_exports2, {
-    create: () => create3,
+    create: () => create2,
     createLegacy: () => createLegacy,
     isLink: () => isLink,
     link: () => link3,
     match: () => match2,
     optional: () => optional2,
     parse: () => parse,
-    read: () => read4,
+    read: () => read3,
     schema: () => schema2
   });
   var LinkSchema = class extends API {
@@ -7513,8 +6425,8 @@ ${indent3}`)}`;
             );
           }
           const [expectDigest, actualDigest] = multihash.digest != null ? [
-            base322.baseEncode(multihash.digest),
-            base322.baseEncode(cid.multihash.digest)
+            base32.baseEncode(multihash.digest),
+            base32.baseEncode(cid.multihash.digest)
           ] : ["", ""];
           if (expectDigest !== actualDigest) {
             return error2(
@@ -7534,16 +6446,20 @@ ${indent3}`)}`;
   var schema2 = new LinkSchema({});
   var link3 = () => schema2;
   var match2 = (options = {}) => new LinkSchema(options);
-  var read4 = (input) => schema2.read(input);
+  var read3 = (input) => schema2.read(input);
   var optional2 = () => schema2.optional();
 
-  // node_modules/.pnpm/@ucanto+core@10.0.1/node_modules/@ucanto/core/src/schema/did.js
+  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/schema/did.js
   var did_exports2 = {};
   __export(did_exports2, {
     did: () => did,
-    from: () => from8,
+    didBytes: () => didBytes,
+    from: () => from7,
+    fromBytes: () => fromBytes2,
     match: () => match3,
-    read: () => read5
+    matchBytes: () => matchBytes,
+    read: () => read4,
+    readBytes: () => readBytes2
   });
   var DIDSchema = class extends API {
     /**
@@ -7564,24 +6480,58 @@ ${indent3}`)}`;
   };
   var schema3 = string().refine(new DIDSchema());
   var did = () => schema3;
-  var read5 = (input) => schema3.read(input);
+  var read4 = (input) => schema3.read(input);
   var match3 = (options = {}) => (
     /** @type {Schema.Schema<API.DID<Method> & API.URI<"did:">>} */
     string().refine(new DIDSchema(options.method))
   );
-  var from8 = (input) => match3({}).from(input);
+  var from7 = (input) => match3({}).from(input);
+  var DIDBytesSchema = class extends API {
+    /**
+     * @param {unknown} source
+     * @param {void|Method} method
+     */
+    readWith(source, method) {
+      if (!(source instanceof Uint8Array)) {
+        return typeError({ expect: "Uint8Array", actual: source });
+      }
+      let did2;
+      try {
+        did2 = decode8(source).did();
+      } catch (err) {
+        return error2(`Unable to parse bytes as did: ${err}`);
+      }
+      const prefix = method ? `did:${method}:` : `did:`;
+      if (!did2.startsWith(prefix)) {
+        return error2(`Expected a ${prefix} but got "${did2}" instead`);
+      } else {
+        return { ok: (
+          /** @type {API.DID<Method>} */
+          did2
+        ) };
+      }
+    }
+  };
+  var schemaBytes = new DIDBytesSchema();
+  var didBytes = () => schemaBytes;
+  var readBytes2 = (input) => schemaBytes.read(input);
+  var matchBytes = (options = {}) => (
+    /** @type {Schema.Schema<API.DID<Method> & API.URI<"did:">>} */
+    new DIDBytesSchema(options.method)
+  );
+  var fromBytes2 = (input) => matchBytes({}).from(input);
 
-  // node_modules/.pnpm/@ucanto+core@10.0.1/node_modules/@ucanto/core/src/schema/text.js
+  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/schema/text.js
   var text_exports = {};
   __export(text_exports, {
     match: () => match4,
-    read: () => read6,
+    read: () => read5,
     text: () => text
   });
   var schema4 = string();
   var match4 = (options) => options ? schema4.refine(new Match(options.pattern)) : schema4;
   var text = match4;
-  var read6 = (input) => schema4.read(input);
+  var read5 = (input) => schema4.read(input);
   var Match = class extends API {
     /**
      * @param {string} source
@@ -7598,7 +6548,7 @@ ${indent3}`)}`;
     }
   };
 
-  // node_modules/.pnpm/@ucanto+core@10.0.1/node_modules/@ucanto/core/src/delegation.js
+  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/delegation.js
   var isDelegation = (proof) => !isLink(proof);
   var Delegation = class {
     /**
@@ -7657,7 +6607,7 @@ ${indent3}`)}`;
       return this.root.bytes;
     }
     get data() {
-      const data = decode20(this.root);
+      const data = decode16(this.root);
       Object.defineProperties(this, { data: { value: data, enumerable: false } });
       return data;
     }
@@ -7778,7 +6728,7 @@ ${indent3}`)}`;
         [`ucan@${delegation.version}`]: delegation.root.cid
       });
       store.set(`${variant2.cid}`, variant2);
-      const bytes2 = encode17({
+      const bytes2 = encode15({
         roots: [variant2],
         blocks: store
       });
@@ -7798,7 +6748,7 @@ ${indent3}`)}`;
   });
   var extract = async (archive2) => {
     try {
-      const { roots, blocks } = decode19(archive2);
+      const { roots, blocks } = decode15(archive2);
       const [root] = roots;
       if (root == null) {
         return error2("CAR archive does not contain a root block");
@@ -7823,10 +6773,10 @@ ${indent3}`)}`;
     }
   };
   var decodeCache = /* @__PURE__ */ new WeakMap();
-  var decode20 = ({ bytes: bytes2 }) => {
+  var decode16 = ({ bytes: bytes2 }) => {
     const data = decodeCache.get(bytes2);
     if (!data) {
-      const data2 = decode18(bytes2);
+      const data2 = decode14(bytes2);
       decodeCache.set(bytes2, data2);
       return data2;
     }
@@ -7861,7 +6811,7 @@ ${indent3}`)}`;
     return delegation;
   };
   var exportDAG = function* (root, blocks, attachedLinks) {
-    for (const link4 of decode20(root).proofs) {
+    for (const link4 of decode16(root).proofs) {
       const root2 = (
         /** @type {UCAN.Block} */
         blocks.get(`${link4}`)
@@ -7879,7 +6829,7 @@ ${indent3}`)}`;
     yield root;
   };
   var exportSubDAG = function* (root, blocks) {
-    for (const link4 of decode20(root).proofs) {
+    for (const link4 of decode16(root).proofs) {
       const root2 = (
         /** @type {UCAN.Block} */
         blocks.get(`${link4}`)
@@ -7890,23 +6840,23 @@ ${indent3}`)}`;
     }
     yield root;
   };
-  var create5 = ({ root, blocks }) => new Delegation(root, blocks);
+  var create4 = ({ root, blocks }) => new Delegation(root, blocks);
   var view2 = ({ root, blocks }, fallback) => {
     const block = get(root, blocks, null);
     if (block == null) {
       return fallback !== void 0 ? fallback : notFound(root);
     }
-    return create5({ root: block, blocks });
+    return create4({ root: block, blocks });
   };
   var proofs = (delegation) => {
     const proofs2 = [];
     const { root, blocks } = delegation;
-    for (const link4 of decode20(root).proofs) {
+    for (const link4 of decode16(root).proofs) {
       const root2 = (
         /** @type {UCAN.Block} */
         blocks.get(link4.toString())
       );
-      proofs2.push(root2 ? create5({ root: root2, blocks }) : link4);
+      proofs2.push(root2 ? create4({ root: root2, blocks }) : link4);
     }
     Object.defineProperty(delegation, "proofs", { value: proofs2 });
     return proofs2;
@@ -7927,7 +6877,7 @@ ${indent3}`)}`;
     return links;
   }
 
-  // node_modules/.pnpm/@ucanto+core@10.0.1/node_modules/@ucanto/core/src/invocation.js
+  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/invocation.js
   var invoke = (options) => new IssuedInvocation(options);
   var IssuedInvocation = class {
     /**
@@ -7979,10 +6929,10 @@ ${indent3}`)}`;
     }
   };
 
-  // node_modules/.pnpm/@ucanto+core@10.0.1/node_modules/@ucanto/core/src/receipt.js
+  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/receipt.js
   var NOFX = Object.freeze({ fork: Object.freeze([]) });
 
-  // node_modules/.pnpm/@ucanto+core@10.0.1/node_modules/@ucanto/core/src/message.js
+  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/message.js
   var MessageSchema = variant({
     "ucanto/message@7.0.0": struct({
       execute: match2().array().optional(),
@@ -7996,7 +6946,7 @@ ${indent3}`)}`;
     })
   });
 
-  // node_modules/.pnpm/@ucanto+validator@9.0.2/node_modules/@ucanto/validator/src/util.js
+  // node_modules/.pnpm/@ucanto+validator@9.0.3/node_modules/@ucanto/validator/src/util.js
   var the = (value) => value;
   var entries = (object) => (
     /** @type {any} */
@@ -8024,7 +6974,7 @@ ${indent3}`)}`;
     return [...result];
   };
 
-  // node_modules/.pnpm/@ucanto+validator@9.0.2/node_modules/@ucanto/validator/src/error.js
+  // node_modules/.pnpm/@ucanto+validator@9.0.3/node_modules/@ucanto/validator/src/error.js
   var EscalatedCapability = class extends Failure {
     /**
      * @param {API.ParsedCapability} claimed
@@ -8195,7 +7145,7 @@ ${indent3}`)}`;
     }
     describe() {
       return [
-        `Encountered malformed '${this.capability.can}' capability: ${format7(
+        `Encountered malformed '${this.capability.can}' capability: ${format6(
           this.capability
         )}`,
         li2(this.cause.message)
@@ -8213,7 +7163,7 @@ ${indent3}`)}`;
     }
     /* c8 ignore next 3 */
     describe() {
-      return `Encountered unknown capability: ${format7(this.capability)}`;
+      return `Encountered unknown capability: ${format6(this.capability)}`;
     }
   };
   var Expired = class extends Failure {
@@ -8310,7 +7260,7 @@ ${unknown2.join("\n")}`)] : []
       ].join("\n");
     }
   };
-  var format7 = (capability2, space) => JSON.stringify(
+  var format6 = (capability2, space) => JSON.stringify(
     capability2,
     (_key, value) => {
       if (isLink(value)) {
@@ -8325,7 +7275,7 @@ ${unknown2.join("\n")}`)] : []
 ${indent3}`)}`;
   var li2 = (message) => indent2(`- ${message}`);
 
-  // node_modules/.pnpm/@ucanto+validator@9.0.2/node_modules/@ucanto/validator/src/capability.js
+  // node_modules/.pnpm/@ucanto+validator@9.0.3/node_modules/@ucanto/validator/src/capability.js
   var capability = ({
     derives = defaultDerives,
     nb = defaultNBSchema,
@@ -8335,9 +7285,9 @@ ${indent3}`)}`;
     /** @type {Schema.MapRepresentation<any>} */
     schema_exports3.struct({})
   );
-  var or4 = (left, right) => new Or(left, right);
+  var or3 = (left, right) => new Or(left, right);
   var and2 = (...selectors) => new And(selectors);
-  var derive = ({ from: from11, to, derives }) => new Derive(from11, to, derives);
+  var derive = ({ from: from10, to, derives }) => new Derive(from10, to, derives);
   var View2 = class {
     /**
      * @param {API.Source} source
@@ -8372,7 +7322,7 @@ ${indent3}`)}`;
      * @returns {API.CapabilityParser<M | W>}
      */
     or(other) {
-      return or4(this, other);
+      return or3(this, other);
     }
     /**
      * @template {API.Match} W
@@ -8586,9 +7536,9 @@ ${indent3}`)}`;
      * @param {API.TheCapabilityParser<API.DirectMatch<T>>} to
      * @param {API.Derives<T, API.InferDeriveProof<M['value']>>} derives
      */
-    constructor(from11, to, derives) {
+    constructor(from10, to, derives) {
       super();
-      this.from = from11;
+      this.from = from10;
       this.to = to;
       this.derives = derives;
     }
@@ -8711,9 +7661,9 @@ ${indent3}`)}`;
      * @param {API.MatchSelector<M>} from
      * @param {API.Derives<T, API.InferDeriveProof<M['value']>>} derives
      */
-    constructor(selected, from11, derives) {
+    constructor(selected, from10, derives) {
       this.selected = selected;
-      this.from = from11;
+      this.from = from10;
       this.derives = derives;
     }
     get can() {
@@ -8747,10 +7697,10 @@ ${indent3}`)}`;
      * @param {API.Source[]} capabilities
      */
     select(capabilities) {
-      const { derives, selected, from: from11 } = this;
+      const { derives, selected, from: from10 } = this;
       const { value } = selected;
       const direct = selected.select(capabilities);
-      const derived = from11.select(capabilities);
+      const derived = from10.select(capabilities);
       const matches = [];
       const errors = [];
       for (const match5 of derived.matches) {
@@ -8774,7 +7724,7 @@ ${indent3}`)}`;
           ...derived.errors.map((error4) => new DelegationError([error4], this))
         ],
         matches: [
-          ...direct.matches.map((match5) => new _DerivedMatch(match5, from11, derives)),
+          ...direct.matches.map((match5) => new _DerivedMatch(match5, from10, derives)),
           ...matches
         ]
       };
@@ -8989,7 +7939,7 @@ ${indent3}`)}`;
     return { ok: true };
   };
 
-  // node_modules/.pnpm/@ucanto+validator@9.0.2/node_modules/@ucanto/validator/src/authorization.js
+  // node_modules/.pnpm/@ucanto+validator@9.0.3/node_modules/@ucanto/validator/src/authorization.js
   var Authorization = class {
     /**
      * @param {API.Match<C>} match
@@ -9012,9 +7962,9 @@ ${indent3}`)}`;
       return this.delegation.audience;
     }
   };
-  var create6 = (match5, proofs2 = []) => new Authorization(match5, proofs2);
+  var create5 = (match5, proofs2 = []) => new Authorization(match5, proofs2);
 
-  // node_modules/.pnpm/@ucanto+validator@9.0.2/node_modules/@ucanto/validator/src/lib.js
+  // node_modules/.pnpm/@ucanto+validator@9.0.3/node_modules/@ucanto/validator/src/lib.js
   var unavailable = (proof) => ({ error: new UnavailableProof(proof) });
   var failDIDKeyResolution = (did2) => ({ error: new DIDKeyResolutionError(did2) });
   var resolveMatch = async (match5, config) => {
@@ -9155,7 +8105,7 @@ ${indent3}`)}`;
     for (const matched of selection.matches) {
       const selector = matched.prune(config);
       if (selector == null) {
-        const authorization = create6(matched, []);
+        const authorization = create5(matched, []);
         const result = await validateAuthorization(authorization);
         if (result.error) {
           invalidProofs.push(result.error);
@@ -9167,7 +8117,7 @@ ${indent3}`)}`;
         if (result.error) {
           failedProofs.push(result.error);
         } else {
-          const authorization = create6(matched, [result.ok]);
+          const authorization = create5(matched, [result.ok]);
           const approval = await validateAuthorization(authorization);
           if (approval.error) {
             invalidProofs.push(approval.error);
@@ -9196,7 +8146,7 @@ ${indent3}`)}`;
       const selector = matched.prune(config);
       if (selector == null) {
         return {
-          ok: create6(
+          ok: create5(
             // @ts-expect-error - it may not be a parsed capability but rather a
             // group of capabilities but we can deal with that in the future.
             matched,
@@ -9209,7 +8159,7 @@ ${indent3}`)}`;
           failedProofs.push(result.error);
         } else {
           return {
-            ok: create6(
+            ok: create5(
               // @ts-expect-error - it may not be a parsed capability but rather a
               // group of capabilities but we can deal with that in the future.
               matched,
@@ -9459,15 +8409,15 @@ ${unknown2.join("\n")}`)] : []
       const windows = 1 + 256 / W;
       const points = [];
       let p = this;
-      let base3 = p;
+      let base2 = p;
       for (let window2 = 0; window2 < windows; window2++) {
-        base3 = p;
-        points.push(base3);
+        base2 = p;
+        points.push(base2);
         for (let i = 1; i < 2 ** (W - 1); i++) {
-          base3 = base3.add(p);
-          points.push(base3);
+          base2 = base2.add(p);
+          points.push(base2);
         }
-        p = base3.double();
+        p = base2.double();
       }
       return points;
     }
@@ -9806,8 +8756,8 @@ ${unknown2.join("\n")}`)] : []
       throw new Error("Expected Uint8Array list");
     if (arrays.length === 1)
       return arrays[0];
-    const length3 = arrays.reduce((a, arr) => a + arr.length, 0);
-    const result = new Uint8Array(length3);
+    const length2 = arrays.reduce((a, arr) => a + arr.length, 0);
+    const result = new Uint8Array(length2);
     for (let i = 0, pad = 0; i < arrays.length; i++) {
       const arr = arrays[i];
       result.set(arr, pad);
@@ -9843,8 +8793,8 @@ ${unknown2.join("\n")}`)] : []
     return array2;
   }
   function numberTo32BytesBE(num) {
-    const length3 = 32;
-    const hex = num.toString(16).padStart(length3 * 2, "0");
+    const length2 = 32;
+    const hex = num.toString(16).padStart(length2 * 2, "0");
     return hexToBytes(hex);
   }
   function numberTo32BytesLE(num) {
@@ -10115,21 +9065,21 @@ ${unknown2.join("\n")}`)] : []
     }
   });
 
-  // node_modules/.pnpm/@ucanto+principal@9.0.1/node_modules/@ucanto/principal/src/ed25519/verifier.js
+  // node_modules/.pnpm/@ucanto+principal@9.0.2/node_modules/@ucanto/principal/src/ed25519/verifier.js
   var verifier_exports = {};
   __export(verifier_exports, {
     code: () => code6,
-    decode: () => decode22,
-    encode: () => encode18,
-    format: () => format8,
+    decode: () => decode18,
+    encode: () => encode16,
+    format: () => format7,
     name: () => name4,
-    or: () => or6,
+    or: () => or5,
     parse: () => parse6,
     signatureAlgorithm: () => signatureAlgorithm,
     signatureCode: () => signatureCode
   });
 
-  // node_modules/.pnpm/@ucanto+principal@9.0.1/node_modules/@ucanto/principal/src/verifier.js
+  // node_modules/.pnpm/@ucanto+principal@9.0.2/node_modules/@ucanto/principal/src/verifier.js
   var parseWith = (did2, parsers) => {
     if (did2.startsWith("did:")) {
       for (const parser of parsers) {
@@ -10143,7 +9093,7 @@ ${unknown2.join("\n")}`)] : []
       throw new Error(`Expected did instead got ${did2}`);
     }
   };
-  var or5 = (left, right) => new Parser([left, right]);
+  var or4 = (left, right) => new Parser([left, right]);
   var Parser = class _Parser {
     /**
      * @param {API.PrincipalParser[]} variants
@@ -10198,16 +9148,16 @@ ${unknown2.join("\n")}`)] : []
     }
   };
 
-  // node_modules/.pnpm/@ucanto+principal@9.0.1/node_modules/@ucanto/principal/src/ed25519/verifier.js
+  // node_modules/.pnpm/@ucanto+principal@9.0.2/node_modules/@ucanto/principal/src/ed25519/verifier.js
   var code6 = 237;
   var name4 = "Ed25519";
   var signatureCode = EdDSA;
   var signatureAlgorithm = "EdDSA";
-  var PUBLIC_TAG_SIZE = varint_exports2.encodingLength(code6);
+  var PUBLIC_TAG_SIZE = varint_exports.encodingLength(code6);
   var SIZE = 32 + PUBLIC_TAG_SIZE;
-  var parse6 = (did2) => decode22(parse2(did2));
-  var decode22 = (bytes2) => {
-    const [algorithm2] = varint_exports2.decode(bytes2);
+  var parse6 = (did2) => decode18(parse2(did2));
+  var decode18 = (bytes2) => {
+    const [algorithm2] = varint_exports.decode(bytes2);
     if (algorithm2 !== code6) {
       throw new RangeError(
         `Unsupported key algorithm with multicode 0x${code6.toString(16)}`
@@ -10220,8 +9170,8 @@ ${unknown2.join("\n")}`)] : []
       return new Ed25519Verifier(bytes2.buffer, bytes2.byteOffset, bytes2.byteLength);
     }
   };
-  var format8 = (principal) => format3(principal);
-  var encode18 = (principal) => encode9(principal);
+  var format7 = (principal) => format2(principal);
+  var encode16 = (principal) => encode7(principal);
   var Ed25519Verifier = class extends Uint8Array {
     /** @type {typeof code} */
     get code() {
@@ -10254,7 +9204,7 @@ ${unknown2.join("\n")}`)] : []
      * @returns {API.DID<"key">}
      */
     did() {
-      return `did:key:${base58btc2.encode(this)}`;
+      return `did:key:${base58btc.encode(this)}`;
     }
     /**
      * @template T
@@ -10277,17 +9227,17 @@ ${unknown2.join("\n")}`)] : []
       return this.did();
     }
   };
-  var or6 = (other) => or5({ parse: parse6 }, other);
+  var or5 = (other) => or4({ parse: parse6 }, other);
 
-  // node_modules/.pnpm/@ucanto+principal@9.0.1/node_modules/@ucanto/principal/src/signer.js
-  var or7 = (left, right) => new Importer([left, right]);
+  // node_modules/.pnpm/@ucanto+principal@9.0.2/node_modules/@ucanto/principal/src/signer.js
+  var or6 = (left, right) => new Importer([left, right]);
   var Importer = class _Importer {
     /**
      * @param {Importers} variants
      */
     constructor(variants) {
       this.variants = variants;
-      this.from = create7(variants);
+      this.from = create6(variants);
     }
     /**
      * @template {API.SignerImporter} Other
@@ -10298,8 +9248,8 @@ ${unknown2.join("\n")}`)] : []
       return new _Importer([other, ...this.variants]);
     }
   };
-  var create7 = (importers) => {
-    const from11 = (archive2) => {
+  var create6 = (importers) => {
+    const from10 = (archive2) => {
       if (archive2.id.startsWith("did:key:")) {
         return (
           /** @type {API.Signer<ID, Alg>} */
@@ -10328,7 +9278,7 @@ ${unknown2.join("\n")}`)] : []
     };
     return (
       /** @type {API.Intersection<Importers[number]['from']>} */
-      from11
+      from10
     );
   };
   var importWith = (archive2, importers) => {
@@ -10400,41 +9350,41 @@ ${unknown2.join("\n")}`)] : []
     }
   };
 
-  // node_modules/.pnpm/@ucanto+principal@9.0.1/node_modules/@ucanto/principal/src/ed25519/signer.js
+  // node_modules/.pnpm/@ucanto+principal@9.0.2/node_modules/@ucanto/principal/src/ed25519/signer.js
   var code7 = 4864;
   var signatureAlgorithm2 = signatureAlgorithm;
-  var PRIVATE_TAG_SIZE = varint_exports2.encodingLength(code7);
-  var PUBLIC_TAG_SIZE2 = varint_exports2.encodingLength(code6);
+  var PRIVATE_TAG_SIZE = varint_exports.encodingLength(code7);
+  var PUBLIC_TAG_SIZE2 = varint_exports.encodingLength(code6);
   var KEY_SIZE = 32;
   var SIZE2 = PRIVATE_TAG_SIZE + KEY_SIZE + PUBLIC_TAG_SIZE2 + KEY_SIZE;
   var PUB_KEY_OFFSET = PRIVATE_TAG_SIZE + KEY_SIZE;
-  var from9 = ({ id, keys }) => {
+  var from8 = ({ id, keys }) => {
     if (id.startsWith("did:key:")) {
       const key = keys[
         /** @type {API.DIDKey} */
         id
       ];
       if (key instanceof Uint8Array) {
-        return decode23(key);
+        return decode19(key);
       }
     }
     throw new TypeError(`Unsupported archive format`);
   };
-  var or8 = (other) => or7({ from: from9 }, other);
-  var decode23 = (bytes2) => {
+  var or7 = (other) => or6({ from: from8 }, other);
+  var decode19 = (bytes2) => {
     if (bytes2.byteLength !== SIZE2) {
       throw new Error(
         `Expected Uint8Array with byteLength of ${SIZE2} instead not ${bytes2.byteLength}`
       );
     }
     {
-      const [keyCode] = varint_exports2.decode(bytes2);
+      const [keyCode] = varint_exports.decode(bytes2);
       if (keyCode !== code7) {
         throw new Error(`Given bytes must be a multiformat with ${code7} tag`);
       }
     }
     {
-      const [code9] = varint_exports2.decode(bytes2.subarray(PUB_KEY_OFFSET));
+      const [code9] = varint_exports.decode(bytes2.subarray(PUB_KEY_OFFSET));
       if (code9 !== code6) {
         throw new Error(
           `Given bytes must contain public key in multiformats with ${code6} tag`
@@ -10454,7 +9404,7 @@ ${unknown2.join("\n")}`)] : []
     /** @type {API.EdVerifier} */
     get verifier() {
       const bytes2 = new Uint8Array(this.buffer, PRIVATE_TAG_SIZE + KEY_SIZE);
-      const verifier = decode22(bytes2);
+      const verifier = decode18(bytes2);
       Object.defineProperties(this, {
         verifier: {
           value: verifier
@@ -10498,7 +9448,7 @@ ${unknown2.join("\n")}`)] : []
      */
     async sign(payload) {
       const raw = await sign(payload, this.secret);
-      return create4(this.signatureCode, raw);
+      return create3(this.signatureCode, raw);
     }
     /**
      * @template T
@@ -10526,16 +9476,16 @@ ${unknown2.join("\n")}`)] : []
     }
   };
 
-  // node_modules/.pnpm/@ucanto+principal@9.0.1/node_modules/@ucanto/principal/src/rsa.js
+  // node_modules/.pnpm/@ucanto+principal@9.0.2/node_modules/@ucanto/principal/src/rsa.js
   var rsa_exports = {};
   __export(rsa_exports, {
     Verifier: () => RSAVerifier,
     code: () => code8,
-    decode: () => decode28,
-    from: () => from10,
+    decode: () => decode24,
+    from: () => from9,
     generate: () => generate,
     name: () => name5,
-    or: () => or9,
+    or: () => or8,
     signatureAlgorithm: () => signatureAlgorithm3,
     signatureCode: () => signatureCode2
   });
@@ -10544,17 +9494,17 @@ ${unknown2.join("\n")}`)] : []
   var _globalReference = globalThis || window || self;
   var webcrypto = _globalReference.crypto;
 
-  // node_modules/.pnpm/@ucanto+principal@9.0.1/node_modules/@ucanto/principal/src/multiformat.js
+  // node_modules/.pnpm/@ucanto+principal@9.0.2/node_modules/@ucanto/principal/src/multiformat.js
   var tagWith = (code9, bytes2) => {
-    const offset = varint_exports2.encodingLength(code9);
+    const offset = varint_exports.encodingLength(code9);
     const multiformat = new Uint8Array(bytes2.byteLength + offset);
-    varint_exports2.encodeTo(code9, multiformat, 0);
+    varint_exports.encodeTo(code9, multiformat, 0);
     multiformat.set(bytes2, offset);
     return multiformat;
   };
   var untagWith = (code9, source, byteOffset = 0) => {
     const bytes2 = byteOffset !== 0 ? source.subarray(byteOffset) : source;
-    const [tag, size2] = varint_exports2.decode(bytes2);
+    const [tag, size2] = varint_exports.decode(bytes2);
     if (tag !== code9) {
       throw new Error(
         `Expected multiformat with 0x${code9.toString(
@@ -10565,25 +9515,25 @@ ${unknown2.join("\n")}`)] : []
       return new Uint8Array(bytes2.buffer, bytes2.byteOffset + size2);
     }
   };
-  var encodingLength3 = varint_exports2.encodingLength;
-  var encodeTo3 = varint_exports2.encodeTo;
-  var decode24 = varint_exports2.decode;
+  var encodingLength2 = varint_exports.encodingLength;
+  var encodeTo2 = varint_exports.encodeTo;
+  var decode20 = varint_exports.decode;
 
-  // node_modules/.pnpm/@ucanto+principal@9.0.1/node_modules/@ucanto/principal/src/rsa/asn1.js
+  // node_modules/.pnpm/@ucanto+principal@9.0.2/node_modules/@ucanto/principal/src/rsa/asn1.js
   var TAG_SIZE = 1;
   var INT_TAG = 2;
   var BITSTRING_TAG = 3;
   var OCTET_STRING_TAG = 4;
   var SEQUENCE_TAG = 48;
   var UNUSED_BIT_PAD = 0;
-  var encodeDERLength = (length3) => {
-    if (length3 <= 127) {
-      return new Uint8Array([length3]);
+  var encodeDERLength = (length2) => {
+    if (length2 <= 127) {
+      return new Uint8Array([length2]);
     }
     const octets = [];
-    while (length3 !== 0) {
-      octets.push(length3 & 255);
-      length3 = length3 >>> 8;
+    while (length2 !== 0) {
+      octets.push(length2 & 255);
+      length2 = length2 >>> 8;
     }
     octets.reverse();
     return new Uint8Array([128 | octets.length & 255, ...octets]);
@@ -10598,12 +9548,12 @@ ${unknown2.join("\n")}`)] : []
         `ASN parsing error: Too few bytes. Expected encoded length's length to be at least ${numberBytes}`
       );
     }
-    let length3 = 0;
+    let length2 = 0;
     for (let i = 0; i < numberBytes; i++) {
-      length3 = length3 << 8;
-      length3 = length3 | bytes2[offset + i + 1];
+      length2 = length2 << 8;
+      length2 = length2 | bytes2[offset + i + 1];
     }
-    return { number: length3, consumed: numberBytes + 1 };
+    return { number: length2, consumed: numberBytes + 1 };
   };
   var skip = (input, expectedTag, position) => {
     const parsed = into(input, expectedTag, position);
@@ -10618,35 +9568,35 @@ ${unknown2.join("\n")}`)] : []
         )} at position ${offset}, but got 0x${actualTag.toString(16)}.`
       );
     }
-    const length3 = readDERLength(input, offset + TAG_SIZE);
-    const position = offset + TAG_SIZE + length3.consumed;
-    return { position, length: length3.number };
+    const length2 = readDERLength(input, offset + TAG_SIZE);
+    const position = offset + TAG_SIZE + length2.consumed;
+    return { position, length: length2.number };
   };
   var encodeBitString = (input) => {
-    const length3 = encodeDERLength(input.byteLength + 1);
+    const length2 = encodeDERLength(input.byteLength + 1);
     const bytes2 = new Uint8Array(
       TAG_SIZE + // ASN_BITSTRING_TAG
-      length3.byteLength + 1 + // amount of unused bits at the end of our bitstring
+      length2.byteLength + 1 + // amount of unused bits at the end of our bitstring
       input.byteLength
     );
     let byteOffset = 0;
     bytes2[byteOffset] = BITSTRING_TAG;
     byteOffset += TAG_SIZE;
-    bytes2.set(length3, byteOffset);
-    byteOffset += length3.byteLength;
+    bytes2.set(length2, byteOffset);
+    byteOffset += length2.byteLength;
     bytes2[byteOffset] = UNUSED_BIT_PAD;
     byteOffset += 1;
     bytes2.set(input, byteOffset);
     return bytes2;
   };
   var encodeOctetString = (input) => {
-    const length3 = encodeDERLength(input.byteLength);
-    const bytes2 = new Uint8Array(TAG_SIZE + length3.byteLength + input.byteLength);
+    const length2 = encodeDERLength(input.byteLength);
+    const bytes2 = new Uint8Array(TAG_SIZE + length2.byteLength + input.byteLength);
     let byteOffset = 0;
     bytes2[byteOffset] = OCTET_STRING_TAG;
     byteOffset += TAG_SIZE;
-    bytes2.set(length3, byteOffset);
-    byteOffset += length3.byteLength;
+    bytes2.set(length2, byteOffset);
+    byteOffset += length2.byteLength;
     bytes2.set(input, byteOffset);
     return bytes2;
   };
@@ -10655,13 +9605,13 @@ ${unknown2.join("\n")}`)] : []
     for (const item of sequence) {
       byteLength += item.byteLength;
     }
-    const length3 = encodeDERLength(byteLength);
-    const bytes2 = new Uint8Array(TAG_SIZE + length3.byteLength + byteLength);
+    const length2 = encodeDERLength(byteLength);
+    const bytes2 = new Uint8Array(TAG_SIZE + length2.byteLength + byteLength);
     let byteOffset = 0;
     bytes2[byteOffset] = SEQUENCE_TAG;
     byteOffset += TAG_SIZE;
-    bytes2.set(length3, byteOffset);
-    byteOffset += length3.byteLength;
+    bytes2.set(length2, byteOffset);
+    byteOffset += length2.byteLength;
     for (const item of sequence) {
       bytes2.set(item, byteOffset);
       byteOffset += item.byteLength;
@@ -10669,21 +9619,21 @@ ${unknown2.join("\n")}`)] : []
     return bytes2;
   };
   var readSequence = (bytes2, offset = 0) => {
-    const { position, length: length3 } = into(bytes2, SEQUENCE_TAG, offset);
-    return new Uint8Array(bytes2.buffer, bytes2.byteOffset + position, length3);
+    const { position, length: length2 } = into(bytes2, SEQUENCE_TAG, offset);
+    return new Uint8Array(bytes2.buffer, bytes2.byteOffset + position, length2);
   };
   var encodeInt = (input) => {
     const extra = input.byteLength === 0 || input[0] & 128 ? 1 : 0;
-    const length3 = encodeDERLength(input.byteLength + extra);
+    const length2 = encodeDERLength(input.byteLength + extra);
     const bytes2 = new Uint8Array(
       TAG_SIZE + // INT_TAG
-      length3.byteLength + input.byteLength + extra
+      length2.byteLength + input.byteLength + extra
     );
     let byteOffset = 0;
     bytes2[byteOffset] = INT_TAG;
     byteOffset += TAG_SIZE;
-    bytes2.set(length3, byteOffset);
-    byteOffset += length3.byteLength;
+    bytes2.set(length2, byteOffset);
+    byteOffset += length2.byteLength;
     if (extra > 0) {
       bytes2[byteOffset] = UNUSED_BIT_PAD;
       byteOffset += extra;
@@ -10695,7 +9645,7 @@ ${unknown2.join("\n")}`)] : []
   var skipSequence = (bytes2, offset = 0) => skip(bytes2, SEQUENCE_TAG, offset);
   var skipInt = (bytes2, offset = 0) => skip(bytes2, INT_TAG, offset);
   var readBitString = (bytes2, offset = 0) => {
-    const { position, length: length3 } = into(bytes2, BITSTRING_TAG, offset);
+    const { position, length: length2 } = into(bytes2, BITSTRING_TAG, offset);
     const tag = bytes2[position];
     if (tag !== UNUSED_BIT_PAD) {
       throw new Error(
@@ -10705,11 +9655,11 @@ ${unknown2.join("\n")}`)] : []
     return new Uint8Array(
       bytes2.buffer,
       bytes2.byteOffset + position + 1,
-      length3 - 1
+      length2 - 1
     );
   };
   var readInt2 = (bytes2, byteOffset = 0) => {
-    const { position, length: length3 } = into(bytes2, INT_TAG, byteOffset);
+    const { position, length: length2 } = into(bytes2, INT_TAG, byteOffset);
     let delta = 0;
     while (bytes2[position + delta] === 0) {
       delta++;
@@ -10717,26 +9667,26 @@ ${unknown2.join("\n")}`)] : []
     return new Uint8Array(
       bytes2.buffer,
       bytes2.byteOffset + position + delta,
-      length3 - delta
+      length2 - delta
     );
   };
   var readOctetString = (bytes2, offset = 0) => {
-    const { position, length: length3 } = into(bytes2, OCTET_STRING_TAG, offset);
-    return new Uint8Array(bytes2.buffer, bytes2.byteOffset + position, length3);
+    const { position, length: length2 } = into(bytes2, OCTET_STRING_TAG, offset);
+    return new Uint8Array(bytes2.buffer, bytes2.byteOffset + position, length2);
   };
   var readSequenceWith = (readers, source, byteOffset = 0) => {
     const results = [];
     const sequence = readSequence(source, byteOffset);
     let offset = 0;
-    for (const read7 of readers) {
-      const chunk = read7(sequence, offset);
+    for (const read6 of readers) {
+      const chunk = read6(sequence, offset);
       results.push(chunk);
       offset = chunk.byteOffset + chunk.byteLength - sequence.byteOffset;
     }
     return results;
   };
 
-  // node_modules/.pnpm/@ucanto+principal@9.0.1/node_modules/@ucanto/principal/src/rsa/spki.js
+  // node_modules/.pnpm/@ucanto+principal@9.0.2/node_modules/@ucanto/principal/src/rsa/spki.js
   var SPKI_PARAMS_ENCODED = new Uint8Array([
     48,
     13,
@@ -10754,14 +9704,14 @@ ${unknown2.join("\n")}`)] : []
     5,
     0
   ]);
-  var encode19 = (key) => encodeSequence([SPKI_PARAMS_ENCODED, encodeBitString(key)]);
-  var decode25 = (info) => {
+  var encode17 = (key) => encodeSequence([SPKI_PARAMS_ENCODED, encodeBitString(key)]);
+  var decode21 = (info) => {
     const offset = enterSequence(info, 0);
     const keyOffset = skipSequence(info, offset);
     return readBitString(info, keyOffset);
   };
 
-  // node_modules/.pnpm/@ucanto+principal@9.0.1/node_modules/@ucanto/principal/src/rsa/pkcs8.js
+  // node_modules/.pnpm/@ucanto+principal@9.0.2/node_modules/@ucanto/principal/src/rsa/pkcs8.js
   var PKSC8_HEADER = new Uint8Array([
     // version
     2,
@@ -10784,21 +9734,21 @@ ${unknown2.join("\n")}`)] : []
     5,
     0
   ]);
-  var decode26 = (info) => {
+  var decode22 = (info) => {
     let offset = 0;
     offset = enterSequence(info, offset);
     offset = skipInt(info, offset);
     offset = skipSequence(info, offset);
     return readOctetString(info, offset);
   };
-  var encode20 = (key) => encodeSequence([PKSC8_HEADER, encodeOctetString(key)]);
+  var encode18 = (key) => encodeSequence([PKSC8_HEADER, encodeOctetString(key)]);
 
-  // node_modules/.pnpm/@ucanto+principal@9.0.1/node_modules/@ucanto/principal/src/rsa/public-key.js
-  var encode21 = ({ n, e }) => encodeSequence([encodeInt(n), encodeInt(e)]);
+  // node_modules/.pnpm/@ucanto+principal@9.0.2/node_modules/@ucanto/principal/src/rsa/public-key.js
+  var encode19 = ({ n, e }) => encodeSequence([encodeInt(n), encodeInt(e)]);
 
-  // node_modules/.pnpm/@ucanto+principal@9.0.1/node_modules/@ucanto/principal/src/rsa/private-key.js
+  // node_modules/.pnpm/@ucanto+principal@9.0.2/node_modules/@ucanto/principal/src/rsa/private-key.js
   var VERSION2 = new Uint8Array();
-  var decode27 = (source, byteOffset = 0) => {
+  var decode23 = (source, byteOffset = 0) => {
     const [v, n, e, d, p, q, dp, dq, qi] = readSequenceWith(
       [
         readInt2,
@@ -10817,7 +9767,7 @@ ${unknown2.join("\n")}`)] : []
     return { v, n, e, d, p, q, dp, dq, qi };
   };
 
-  // node_modules/.pnpm/@ucanto+principal@9.0.1/node_modules/@ucanto/principal/src/rsa.js
+  // node_modules/.pnpm/@ucanto+principal@9.0.2/node_modules/@ucanto/principal/src/rsa.js
   var name5 = "RSA";
   var code8 = 4869;
   var verifierCode = 4613;
@@ -10846,7 +9796,7 @@ ${unknown2.join("\n")}`)] : []
       ["sign", "verify"]
     );
     const spki = await webcrypto.subtle.exportKey("spki", publicKey);
-    const publicBytes = tagWith(verifierCode, decode25(new Uint8Array(spki)));
+    const publicBytes = tagWith(verifierCode, decode21(new Uint8Array(spki)));
     const verifier = new RSAVerifier({ bytes: publicBytes, publicKey });
     if (!extractable) {
       return new UnextractableRSASigner({
@@ -10855,7 +9805,7 @@ ${unknown2.join("\n")}`)] : []
       });
     } else {
       const pkcs8 = await webcrypto.subtle.exportKey("pkcs8", privateKey);
-      const bytes2 = tagWith(code8, decode26(new Uint8Array(pkcs8)));
+      const bytes2 = tagWith(code8, decode22(new Uint8Array(pkcs8)));
       return new ExtractableRSASigner({
         privateKey,
         bytes: bytes2,
@@ -10863,7 +9813,7 @@ ${unknown2.join("\n")}`)] : []
       });
     }
   };
-  var from10 = ({ id, keys }) => {
+  var from9 = ({ id, keys }) => {
     if (id.startsWith("did:key:")) {
       const did2 = (
         /** @type {API.DIDKey} */
@@ -10871,7 +9821,7 @@ ${unknown2.join("\n")}`)] : []
       );
       const key = keys[did2];
       if (key instanceof Uint8Array) {
-        return decode28(key);
+        return decode24(key);
       } else {
         return new UnextractableRSASigner({
           privateKey: key,
@@ -10884,15 +9834,15 @@ ${unknown2.join("\n")}`)] : []
       );
     }
   };
-  var or9 = (other) => or7({ from: from10 }, other);
-  var decode28 = (bytes2) => {
-    const rsa = decode27(untagWith(code8, bytes2));
-    const publicBytes = tagWith(verifierCode, encode21(rsa));
+  var or8 = (other) => or6({ from: from9 }, other);
+  var decode24 = (bytes2) => {
+    const rsa = decode23(untagWith(code8, bytes2));
+    const publicBytes = tagWith(verifierCode, encode19(rsa));
     return new ExtractableRSASigner({
       bytes: bytes2,
       privateKey: webcrypto.subtle.importKey(
         "pkcs8",
-        encode20(untagWith(code8, bytes2)),
+        encode18(untagWith(code8, bytes2)),
         IMPORT_PARAMS,
         true,
         ["sign"]
@@ -10930,7 +9880,7 @@ ${unknown2.join("\n")}`)] : []
         bytes: bytes2,
         publicKey: webcrypto.subtle.importKey(
           "spki",
-          encode19(untagWith(verifierCode, bytes2)),
+          encode17(untagWith(verifierCode, bytes2)),
           IMPORT_PARAMS,
           true,
           ["verify"]
@@ -10951,7 +9901,7 @@ ${unknown2.join("\n")}`)] : []
      * @param {API.PrincipalParser} other
      */
     static or(other) {
-      return or5(this, other);
+      return or4(this, other);
     }
     /** @type {typeof verifierCode} */
     get code() {
@@ -10974,7 +9924,7 @@ ${unknown2.join("\n")}`)] : []
      * @returns {API.DID<"key">}
      */
     did() {
-      return `did:key:${base58btc2.encode(this.bytes)}`;
+      return `did:key:${base58btc.encode(this.bytes)}`;
     }
     /**
      * @template T
@@ -11050,7 +10000,7 @@ ${unknown2.join("\n")}`)] : []
         await this.privateKey,
         payload
       );
-      return create4(signatureCode2, new Uint8Array(buffer2));
+      return create3(signatureCode2, new Uint8Array(buffer2));
     }
   };
   var ExtractableRSASigner = class extends RSASigner {
@@ -11107,9 +10057,9 @@ ${unknown2.join("\n")}`)] : []
     }
   };
 
-  // node_modules/.pnpm/@ucanto+principal@9.0.1/node_modules/@ucanto/principal/src/lib.js
+  // node_modules/.pnpm/@ucanto+principal@9.0.2/node_modules/@ucanto/principal/src/lib.js
   var Verifier = verifier_exports.or(RSAVerifier);
-  var Signer = or8(rsa_exports);
+  var Signer = or7(rsa_exports);
 
   // src/lit-actions/validate-decrypt-invocation.js
   var decrypt = async () => {
@@ -11137,8 +10087,8 @@ ${unknown2.join("\n")}`)] : []
           });
           const value = parse3(invocation);
           const delegation = await extract(value);
-          const decryptCapability = delegation.ok.capabilities.find((cap) => cap.can === Decrypt.can);
-          if (decryptCapability.with !== spaceDID) {
+          const decryptCapability = delegation.ok?.capabilities.find((cap) => cap.can === Decrypt.can);
+          if (decryptCapability?.with !== spaceDID) {
             return JSON.stringify(
               error(
                 `Invalid "with" in delegation. Decryption is allowed only for files associated with spaceDID: ${spaceDID}!`
