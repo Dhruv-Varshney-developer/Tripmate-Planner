@@ -1,7 +1,7 @@
 /**
  * Calculate this value by running the script: 'pnpm run ipfsCID'.
  */
-export const ipfsHash = 'QmQFLsGAo1oJjhyEQpN6LCqKuLS1wD3kz91i5PL1ejxy5A'
+export const ipfsHash = 'QmNzx2cs3UQpXKwJxQPhCAFy8LVHaArBikfNbdfFXpyvUi'
 
 /**
  *
