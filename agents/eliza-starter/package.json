@@ -1,0 +1,38 @@
+{
+  "name": "@elizaos/eliza-starter",
+  "version": "0.1.9",
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts",
+    "start": "tsc && node --loader ts-node/esm src/index.ts",
+    "clean": "./scripts/clean.sh"
+  },
+  "dependencies": {
+    "@elizaos/adapter-postgres": "0.1.9",
+    "@elizaos/adapter-sqlite": "0.1.9",
+    "@elizaos/client-direct": "0.1.9",
+    "@elizaos/client-telegram": "0.1.9",
+    "@elizaos/core": "0.1.9",
+    "@elizaos/plugin-bootstrap": "0.1.9",
+    "better-sqlite3": "^11.8.1",
+    "fs": "0.0.1-security",
+    "path": "0.12.7",
+    "sharp": "^0.33.2",
+    
+    "yargs": "17.7.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "pnpm": {
+    "overrides": {
+      "onnxruntime-node": "1.16.3"
+    }
+  },
+  "devDependencies": {
+    "ts-node": "10.9.2",
+    "tsup": "8.3.5",
+    "typescript": "5.6.3"
+  }
+}
