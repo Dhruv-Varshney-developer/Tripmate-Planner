@@ -39,7 +39,7 @@ export function createAgent(
   elizaLogger.success(
     elizaLogger.successesTitle,
     "Creating runtime for character",
-    character.name,
+    character.name
   );
 
   return new AgentRuntime({
@@ -69,8 +69,9 @@ async function startAgent(character: Character, directClient: DirectClient) {
       fs.mkdirSync(dataDir, { recursive: true });
     }
 
-    const db = await initializeDatabase(dataDir);
-    const cache = initializeDbCache(character,  db);
+    const db = initializeDatabase(dataDir);
+    await db.init();
+    const cache = initializeDbCache(character, db);
     const runtime = createAgent(character, db, cache, token);
 
     await runtime.initialize();
@@ -86,7 +87,7 @@ async function startAgent(character: Character, directClient: DirectClient) {
   } catch (error) {
     elizaLogger.error(
       `Error starting agent for character ${character.name}:`,
-      error,
+      error
     );
     console.error(error);
     throw error;
@@ -151,7 +152,6 @@ const startAgents = async () => {
   }
 
   const isDaemonProcess = process.env.DAEMON_PROCESS === "true";
-  
 };
 
 startAgents().catch((error) => {
