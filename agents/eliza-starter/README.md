@@ -7,6 +7,7 @@ Open `src/character.ts` to modify the default character. Uncomment and edit.
 ### Custom characters
 
 To load custom characters instead:
+- Replace `$TELEGRAM_BOT_TOKEN` with actual token in `character.eliza.json`
 - Use `pnpm start --characters="path/to/your/character.json"`
 - Multiple character files can be loaded simultaneously
 
