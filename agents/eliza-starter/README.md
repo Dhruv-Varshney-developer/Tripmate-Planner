@@ -7,6 +7,7 @@ Open `src/character.ts` to modify the default character. Uncomment and edit.
 ### Custom characters
 
 To load custom characters instead:
+- Go to `@BotFather` on telegram. Create a new bot with the username you want to have and get the Telegram Bot Token. For more detail, read [this blog](https://learn.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-telegram?view=azure-bot-service-4.0)
 - Replace `$TELEGRAM_BOT_TOKEN` with actual token in `character.eliza.json`
 - Use `pnpm start --characters="path/to/your/character.json"`
 - Multiple character files can be loaded simultaneously
