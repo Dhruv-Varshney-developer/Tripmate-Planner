@@ -3,6 +3,7 @@ dist
 !index.ts
 !character.ts
 .env
+delegation_v2.car
 node_modules
 dist/
 

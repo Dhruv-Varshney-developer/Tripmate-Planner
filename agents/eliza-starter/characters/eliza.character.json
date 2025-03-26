@@ -1,12 +1,12 @@
 {
   "name": "Eliza",
-  "plugins": [],
-  "clients": ["telegram"],
+  "plugins": ["storagePlugin"],
+  "clients": ["telegram", "discord"],
   "modelProvider": "openrouter",
   "settings": {
     "secrets": {
-      "TELEGRAM_BOT_TOKEN": "${TELEGRAM_BOT_TOKEN}"
-    },
+      "TELEGRAM_BOT_TOKEN":""
+        },
     "voice": {
       "model": "en_US-hfc_female-medium"
     }

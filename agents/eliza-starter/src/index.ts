@@ -2,9 +2,13 @@ import { DirectClient } from "@elizaos/client-direct";
 import {
   AgentRuntime,
   elizaLogger,
+  IAgentRuntime,
+  MemoryManager,
   settings,
   stringToUuid,
   type Character,
+  Service,
+  ServiceType,
 } from "@elizaos/core";
 import { bootstrapPlugin } from "@elizaos/plugin-bootstrap";
 import fs from "fs";
@@ -19,10 +23,28 @@ import {
   loadCharacters,
   parseArguments,
 } from "./config/index.ts";
-import { initializeDatabase } from "./database/index.ts";
+import { initializeDatabase} from "./database/index.ts";
+import { getStorageClient } from "@storacha/elizaos-plugin";
+import { object } from "zod";
+import { retrieveTripData, storeTripData } from "../storacha/tripStorage.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+declare module "@elizaos/core" {
+  export enum ServiceType {
+    STORACHA = "storacha",
+  }
+}
+
+// Extend the ServiceType enum
+declare module "@elizaos/core" {
+  interface Service {
+    storeTripData?: (data: any) => Promise<string>;
+    retrieveTripData?: (cid: string) => Promise<any>;
+  }
+}
+
 
 export const wait = (minTime: number = 1000, maxTime: number = 3000) => {
   const waitTime =
@@ -73,8 +95,43 @@ async function startAgent(character: Character, directClient: DirectClient) {
     await db.init();
     const cache = initializeDbCache(character, db);
     const runtime = createAgent(character, db, cache, token);
+    const storageClient = await getStorageClient(runtime as any);
 
     await runtime.initialize();
+
+    runtime.registerAction({
+      name: 'storeTripData',
+      description: 'Store summarized trip data as an attachment in decentralized storage.',
+      similes: ['UPLOAD', 'STORE', 'SAVE'],
+      validate: async () => true,
+      handler: async (_, message, state, options, callback) => {
+        const msg=message.content.text
+        if(msg.includes("upload") || msg.includes("save") || msg.includes("store")){
+          await storeTripData(state, callback, storageClient)
+        }
+      },
+      examples: [
+        [{ user: "{{user1}}", content: { text: "Save my trip details." } },
+         { user: "{{agent}}", content: { text: "Trip data saved! Here is the link : https://{{CID}}.ipfs.w3s.link/" } }],
+      ],
+    });
+
+    runtime.registerAction({
+      name: 'retrieveTripData',
+      description: 'Retrieve trip data from decentralized storage using CID.',
+      similes: ['RETRIEVE', 'FETCH', 'LOAD', 'SEND'],
+      validate: async () => true,
+      handler: async (_, message, state, options, callback) => {
+        const msg=message.content.text
+        if(msg.includes("send") || msg.includes("retrieve") || msg.includes("fetch")){
+          await retrieveTripData(message, state, callback, storageClient)
+        }
+      },
+      examples: [
+        [{ user: "{{user1}}", content: { text: "Retrieve my trip data..." } },
+         { user: "{{agent}}", content: { text: "Here’s your trip data: { Budget... }" } }],
+      ],
+    });
 
     runtime.clients = await initializeClients(character, runtime);
 
