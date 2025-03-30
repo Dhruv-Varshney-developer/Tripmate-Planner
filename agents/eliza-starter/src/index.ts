@@ -2,13 +2,9 @@ import { DirectClient } from "@elizaos/client-direct";
 import {
   AgentRuntime,
   elizaLogger,
-  IAgentRuntime,
-  MemoryManager,
   settings,
   stringToUuid,
   type Character,
-  Service,
-  ServiceType,
 } from "@elizaos/core";
 import { bootstrapPlugin } from "@elizaos/plugin-bootstrap";
 import fs from "fs";
@@ -25,8 +21,7 @@ import {
 } from "./config/index.ts";
 import { initializeDatabase} from "./database/index.ts";
 import { getStorageClient } from "@storacha/elizaos-plugin";
-import { object } from "zod";
-import { retrieveTripData, storeTripData } from "../storacha/tripStorage.ts";
+import { retrieveTripData, storeTripData } from "./storacha/tripStorage.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

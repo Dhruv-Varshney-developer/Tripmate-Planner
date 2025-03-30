@@ -1,7 +1,7 @@
 {
   "name": "Eliza",
   "plugins": ["storagePlugin"],
-  "clients": ["telegram", "discord"],
+  "clients": ["telegram"],
   "modelProvider": "openrouter",
   "settings": {
     "secrets": {
