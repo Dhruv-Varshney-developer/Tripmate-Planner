@@ -4280,7 +4280,7 @@
   var isTooEarly = (ucan) => ucan.notBefore != null && now() <= ucan.notBefore;
   var now = () => Math.floor(Date.now() / 1e3);
 
-  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/cbor.js
+  // node_modules/.pnpm/@ucanto+core@10.3.1/node_modules/@ucanto/core/src/cbor.js
   var prepare = (data, seen) => {
     if (seen.has(data)) {
       throw new TypeError("Can not encode circular structure");
@@ -4347,7 +4347,7 @@
     return { cid, bytes: bytes2 };
   };
 
-  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/dag.js
+  // node_modules/.pnpm/@ucanto+core@10.3.1/node_modules/@ucanto/core/src/dag.js
   var EMBED_CODE = identity.code;
   var get = (cid, store, fallback) => {
     if (cid.multihash.code === EMBED_CODE) {
@@ -5039,7 +5039,7 @@ You can use close({ resize: true }) to resize header`);
     return writer;
   };
 
-  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/car.js
+  // node_modules/.pnpm/@ucanto+core@10.3.1/node_modules/@ucanto/core/src/car.js
   var Writer = class {
     /**
      * @param {API.IPLDBlock[]} blocks
@@ -5129,7 +5129,7 @@ You can use close({ resize: true }) to resize header`);
     return { roots, blocks };
   };
 
-  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/schema.js
+  // node_modules/.pnpm/@ucanto+core@10.3.1/node_modules/@ucanto/core/src/schema.js
   var schema_exports3 = {};
   __export(schema_exports3, {
     API: () => API,
@@ -5171,12 +5171,13 @@ You can use close({ resize: true }) to resize header`);
     tuple: () => tuple,
     typeError: () => typeError,
     uint64: () => uint64,
+    union: () => union,
     unknown: () => unknown,
     uri: () => match,
     variant: () => variant
   });
 
-  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/schema/uri.js
+  // node_modules/.pnpm/@ucanto+core@10.3.1/node_modules/@ucanto/core/src/schema/uri.js
   var uri_exports = {};
   __export(uri_exports, {
     from: () => from6,
@@ -5185,7 +5186,7 @@ You can use close({ resize: true }) to resize header`);
     uri: () => uri
   });
 
-  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/result.js
+  // node_modules/.pnpm/@ucanto+core@10.3.1/node_modules/@ucanto/core/src/result.js
   var ok = (value) => {
     if (value == null) {
       throw new TypeError(`ok(${value}) is not allowed, consider ok({}) instead`);
@@ -5216,7 +5217,7 @@ You can use close({ resize: true }) to resize header`);
     }
   };
 
-  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/schema/schema.js
+  // node_modules/.pnpm/@ucanto+core@10.3.1/node_modules/@ucanto/core/src/schema/schema.js
   var API = class {
     /**
      * @param {Settings} settings
@@ -6344,7 +6345,7 @@ You can use close({ resize: true }) to resize header`);
 ${indent3}`)}`;
   var li = (message) => indent(`- ${message}`);
 
-  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/schema/uri.js
+  // node_modules/.pnpm/@ucanto+core@10.3.1/node_modules/@ucanto/core/src/schema/uri.js
   var URISchema = class extends API {
     /**
      * @param {unknown} input
@@ -6381,7 +6382,7 @@ ${indent3}`)}`;
     schema.from(input)
   );
 
-  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/schema/link.js
+  // node_modules/.pnpm/@ucanto+core@10.3.1/node_modules/@ucanto/core/src/schema/link.js
   var link_exports2 = {};
   __export(link_exports2, {
     create: () => create2,
@@ -6449,7 +6450,7 @@ ${indent3}`)}`;
   var read3 = (input) => schema2.read(input);
   var optional2 = () => schema2.optional();
 
-  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/schema/did.js
+  // node_modules/.pnpm/@ucanto+core@10.3.1/node_modules/@ucanto/core/src/schema/did.js
   var did_exports2 = {};
   __export(did_exports2, {
     did: () => did,
@@ -6521,7 +6522,7 @@ ${indent3}`)}`;
   );
   var fromBytes2 = (input) => matchBytes({}).from(input);
 
-  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/schema/text.js
+  // node_modules/.pnpm/@ucanto+core@10.3.1/node_modules/@ucanto/core/src/schema/text.js
   var text_exports = {};
   __export(text_exports, {
     match: () => match4,
@@ -6548,7 +6549,7 @@ ${indent3}`)}`;
     }
   };
 
-  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/delegation.js
+  // node_modules/.pnpm/@ucanto+core@10.3.1/node_modules/@ucanto/core/src/delegation.js
   var isDelegation = (proof) => !isLink(proof);
   var Delegation = class {
     /**
@@ -6877,7 +6878,7 @@ ${indent3}`)}`;
     return links;
   }
 
-  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/invocation.js
+  // node_modules/.pnpm/@ucanto+core@10.3.1/node_modules/@ucanto/core/src/invocation.js
   var invoke = (options) => new IssuedInvocation(options);
   var IssuedInvocation = class {
     /**
@@ -6929,10 +6930,10 @@ ${indent3}`)}`;
     }
   };
 
-  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/receipt.js
+  // node_modules/.pnpm/@ucanto+core@10.3.1/node_modules/@ucanto/core/src/receipt.js
   var NOFX = Object.freeze({ fork: Object.freeze([]) });
 
-  // node_modules/.pnpm/@ucanto+core@10.2.1/node_modules/@ucanto/core/src/message.js
+  // node_modules/.pnpm/@ucanto+core@10.3.1/node_modules/@ucanto/core/src/message.js
   var MessageSchema = variant({
     "ucanto/message@7.0.0": struct({
       execute: match2().array().optional(),
@@ -6946,7 +6947,7 @@ ${indent3}`)}`;
     })
   });
 
-  // node_modules/.pnpm/@ucanto+validator@9.0.3/node_modules/@ucanto/validator/src/util.js
+  // node_modules/.pnpm/@ucanto+validator@9.1.0/node_modules/@ucanto/validator/src/util.js
   var the = (value) => value;
   var entries = (object) => (
     /** @type {any} */
@@ -6974,7 +6975,7 @@ ${indent3}`)}`;
     return [...result];
   };
 
-  // node_modules/.pnpm/@ucanto+validator@9.0.3/node_modules/@ucanto/validator/src/error.js
+  // node_modules/.pnpm/@ucanto+validator@9.1.0/node_modules/@ucanto/validator/src/error.js
   var EscalatedCapability = class extends Failure {
     /**
      * @param {API.ParsedCapability} claimed
@@ -7238,7 +7239,8 @@ ${indent3}`)}`;
       failedProofs
     }) {
       super();
-      this.name = "Unauthorized";
+      this.name = /** @type {const} */
+      "Unauthorized";
       this.capability = capability2;
       this.delegationErrors = delegationErrors;
       this.unknownCapabilities = unknownCapabilities;
@@ -7275,7 +7277,7 @@ ${unknown2.join("\n")}`)] : []
 ${indent3}`)}`;
   var li2 = (message) => indent2(`- ${message}`);
 
-  // node_modules/.pnpm/@ucanto+validator@9.0.3/node_modules/@ucanto/validator/src/capability.js
+  // node_modules/.pnpm/@ucanto+validator@9.1.0/node_modules/@ucanto/validator/src/capability.js
   var capability = ({
     derives = defaultDerives,
     nb = defaultNBSchema,
@@ -7939,7 +7941,7 @@ ${indent3}`)}`;
     return { ok: true };
   };
 
-  // node_modules/.pnpm/@ucanto+validator@9.0.3/node_modules/@ucanto/validator/src/authorization.js
+  // node_modules/.pnpm/@ucanto+validator@9.1.0/node_modules/@ucanto/validator/src/authorization.js
   var Authorization = class {
     /**
      * @param {API.Match<C>} match
@@ -7964,7 +7966,7 @@ ${indent3}`)}`;
   };
   var create5 = (match5, proofs2 = []) => new Authorization(match5, proofs2);
 
-  // node_modules/.pnpm/@ucanto+validator@9.0.3/node_modules/@ucanto/validator/src/lib.js
+  // node_modules/.pnpm/@ucanto+validator@9.1.0/node_modules/@ucanto/validator/src/lib.js
   var unavailable = (proof) => ({ error: new UnavailableProof(proof) });
   var failDIDKeyResolution = (did2) => ({ error: new DIDKeyResolutionError(did2) });
   var resolveMatch = async (match5, config) => {
@@ -8068,7 +8070,8 @@ ${indent3}`)}`;
     validateAuthorization,
     resolveDIDKey = failDIDKeyResolution,
     canIssue = isSelfIssued,
-    resolve = unavailable
+    resolve = unavailable,
+    proofs: localProofs = []
   }) => {
     const config = {
       canIssue,
@@ -8077,7 +8080,8 @@ ${indent3}`)}`;
       capability: capability2,
       authority,
       validateAuthorization,
-      resolveDIDKey
+      resolveDIDKey,
+      proofs: localProofs
     };
     const invalidProofs = [];
     const sources = [];
@@ -8211,7 +8215,8 @@ ${indent3}`)}`;
     constructor(info) {
       super();
       this.info = info;
-      this.name = "InvalidClaim";
+      this.name = /** @type {const} */
+      "InvalidClaim";
     }
     get issuer() {
       return this.delegation.issuer;
@@ -8288,8 +8293,10 @@ ${unknown2.join("\n")}`)] : []
     return valid ? { ok: delegation } : { error: new InvalidSignature(delegation, verifier) };
   };
   var verifySession = async (delegation, proofs2, config) => {
+    const withSchemas = config.proofs.filter((p) => p.capabilities[0].can === "ucan/attest" && p.capabilities[0].with === config.authority.did()).map((p) => literal(p.audience.did()));
+    const withSchema = withSchemas.length ? union([literal(config.authority.did()), ...withSchemas]) : literal(config.authority.did());
     const attestation = capability({
-      with: literal(config.authority.did()),
+      with: withSchema,
       can: "ucan/attest",
       nb: struct({
         proof: match2(delegation.cid)
@@ -8297,9 +8304,7 @@ ${unknown2.join("\n")}`)] : []
     });
     return await claim(
       attestation,
-      // We only consider attestations otherwise we will end up doing an
-      // exponential scan if there are other proofs that require attestations.
-      proofs2.filter(isAttestation),
+      proofs2.filter(isAttestation).filter((p) => p.cid.toString() !== delegation.cid.toString()),
       config
     );
   };
