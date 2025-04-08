@@ -22,6 +22,7 @@ import {
 import { initializeDatabase} from "./database/index.ts";
 import { getStorageClient } from "@storacha/elizaos-plugin";
 import { retrieveTripData, storeTripData } from "./storacha/tripStorage.ts";
+import { connectWebServer, sendToAgent2 } from "./services/wsClient.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -97,12 +98,17 @@ async function startAgent(character: Character, directClient: DirectClient) {
     runtime.registerAction({
       name: 'storeTripData',
       description: 'Store summarized trip data as an attachment in decentralized storage.',
-      similes: ['UPLOAD', 'STORE', 'SAVE'],
+      similes: ['plan', 'trip', 'book', 'flight', 'save', 'upload'],
       validate: async () => true,
       handler: async (_, message, state, options, callback) => {
-        const msg=message.content.text
-        if(msg.includes("upload") || msg.includes("save") || msg.includes("store")){
+        const msg=message.content.text.toLocaleLowerCase()
+        if(msg.includes("save") || msg.includes("upload") || msg.includes("store")){
           await storeTripData(state, callback, storageClient)
+        }
+
+        if (msg.includes('plan') || msg.includes('trip') || msg.includes('book')) {
+          await sendToAgent2(msg);
+          connectWebServer(callback)
         }
       },
       examples: [
