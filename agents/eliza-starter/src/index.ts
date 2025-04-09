@@ -36,7 +36,7 @@ declare module "@elizaos/core" {
 // Extend the ServiceType enum
 declare module "@elizaos/core" {
   interface Service {
-    storeTripData?: (data: any) => Promise<string>;
+    tripRouter?: (data: any) => Promise<string>;
     retrieveTripData?: (cid: string) => Promise<any>;
   }
 }
@@ -96,8 +96,8 @@ async function startAgent(character: Character, directClient: DirectClient) {
     await runtime.initialize();
 
     runtime.registerAction({
-      name: 'storeTripData',
-      description: 'Store summarized trip data as an attachment in decentralized storage.',
+      name: 'tripRouter',
+      description: 'Plan by routing trip data to Agent2 and Store summarized trip data as an attachment in decentralized storage.',
       similes: ['plan', 'trip', 'book', 'flight', 'save', 'upload'],
       validate: async () => true,
       handler: async (_, message, state, options, callback) => {
