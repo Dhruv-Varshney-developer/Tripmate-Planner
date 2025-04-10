@@ -1,5 +1,3 @@
-
-
 # TripMate
 
 TripMate is a sassy AI-powered travel assistant with attitude. It helps you find flights, hotels, trains, and attractions while keeping the tone light and humorous.
@@ -7,14 +5,11 @@ Tripmate is a multi-agentic travel planning system powered by Storacha.
 
 ## Agents
 
-- **[TripMate Planner]** (eliza/README.md) 
-  This agent handles core user interaction logic using ElizaOS and stores user data in Storacha.
+- **[TripMate Planner](eliza/README.md)** -This agent handles core user interaction logic using ElizaOS and stores user data in Storacha.
 
-- **Tripmate-Share**  
-  [GitHub Repository](https://github.com/Dhruv-Varshney-developer/Tripmate-Share) – An AI agent that shares travel information with family and friends.
+- **[Tripmate-Share](https://github.com/Dhruv-Varshney-developer/Tripmate-Share)** – An AI agent that shares travel information with family and friends.
 
-- **Tripmate-Finder**  
-  [GitHub Repository](https://github.com/Dhruv-Varshney-developer/Tripmate-Finder) – This agent searches for real-time travel data using Gemini and the SERP API.
+- **[Tripmate-Finder](https://github.com/Dhruv-Varshney-developer/Tripmate-Finder)** – This agent searches for real-time travel data using Gemini and the SERP API.
 
 ## How It Works
 
