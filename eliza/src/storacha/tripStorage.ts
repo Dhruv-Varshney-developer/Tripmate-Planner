@@ -1,43 +1,44 @@
 import { elizaLogger, HandlerCallback, Memory, State } from "@elizaos/core";
-import { StorageClientImpl } from "@storacha/elizaos-plugin";
 
-export async function storeTripData(state : State, callback : HandlerCallback, storageClient ) {
-  const tripData = state.recentMessages;
-        // console.log(`tripData=`, tripData)
-      
-        if (!tripData) {
-          await callback?.({ text: "Invalid or missing trip data." });
-          return;
-        }
+export async function storeTripData(state: State, callback: HandlerCallback, storageClient) {
+  const tripData=state.recentMessages
 
-        const jsonString = JSON.stringify(tripData);
-        // console.log(`json trip data=`, jsonString);
-        const blob = new Blob([jsonString]);
-        const file = new File([blob], `${state.actorsData[0].username}-TripData.json`, { type: "application/json" });
-        
-        try {
-          const cid = await storageClient.getStorage().uploadFile(file);
-          await callback?.({ text: `Trip data saved! Here is the link: https://${cid}.ipfs.w3s.link/ ` });
-          return cid;
-        } catch (error) {
-          console.log(`error in storeTripData--`, error)
-          await callback?.({ text: "Error uploading trip data." });
-        }
-}
-
-export async function retrieveTripData( message: Memory, state : State, callback : HandlerCallback, storageClient){
-  const cid = await storeTripData(state, callback, storageClient)
-  if (!cid || typeof cid !== 'string') {
-    await callback?.({ text: "Invalid or missing CID." });
+  if (!tripData) {
+    await callback?.({ text: "Invalid or missing trip data." });
     return;
   }
 
+  const username = state?.actorsData?.[0]?.username || 'AlienX';
+  const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+
   try {
-    const data = await storageClient.getContent(cid);
-    await callback?.({ text: `Here’s your trip data : ${data.toString()}` });
-    return data;
+    const jsonString = JSON.stringify(tripData, null, 2);
+    const blobContent = new Blob([jsonString], { type: "application/json" });
+
+    const tripFile = new File([blobContent], `${username}-TripData.json`, {
+      type: "application/json"
+    });
+
+    const metaBlob = new Blob([
+      `User: ${username}\n`,
+      `Timestamp: ${timestamp}\n`,
+      `MessagesCount: ${tripData.length}\n`
+    ], {
+      type: "text/plain"
+    });
+
+    const metaFile = new File([metaBlob], `${username}-MetaInfo.txt`, {
+      type: "text/plain"
+    });
+
+    elizaLogger.info(`Uploading trip data for ${username} to Storacha...`);
+    const files= [tripFile, metaFile];
+
+    const directoryCID = await storageClient.getStorage().uploadDirectory(files);
+
+    await callback?.({ text: `Trip data saved! Here is your link: https://${directoryCID}.ipfs.web3.link/  Secure it in your saved messages!` });
   } catch (error) {
-    await callback?.({ text: "Error retrieving trip data." });
-    console.log(error);
+    console.log(`error in storeTripData--`, error)
+    await callback?.({ text: "Error uploading trip data." });
   }
 }

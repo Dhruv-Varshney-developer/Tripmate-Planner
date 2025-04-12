@@ -1,7 +1,5 @@
 import { Character, Clients, defaultCharacter, ModelProviderName, Plugin } from "@elizaos/core";
-import { getStorageClient, storagePlugin } from "@storacha/elizaos-plugin";
-
-// console.log(`delegation= ${process.env.STORACHA_AGENT_DELEGATION}`)
+import { storagePlugin } from "@storacha/elizaos-plugin";
 
 export const character: Character = {
     ...defaultCharacter,
@@ -11,9 +9,9 @@ export const character: Character = {
     modelProvider: ModelProviderName.OPENROUTER,
     settings: {
         secrets: {
-      TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
-      STORACHA__AGENT_PRIVATE_KEY: process.env.STORACHA_AGENT_PRIVATE_KEY,
-      STORACHA__AGENT_DELEGATION: process.env.STORACHA_AGENT_DELEGATION,
+        TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
+        STORACHA__AGENT_PRIVATE_KEY: process.env.STORACHA_AGENT_PRIVATE_KEY,
+        STORACHA__AGENT_DELEGATION: process.env.STORACHA_AGENT_DELEGATION,
     },
     voice: {
       model: "en_US-hfc_female-medium",

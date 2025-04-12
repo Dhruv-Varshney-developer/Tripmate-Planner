@@ -21,8 +21,9 @@ import {
 } from "./config/index.ts";
 import { initializeDatabase} from "./database/index.ts";
 import { getStorageClient } from "@storacha/elizaos-plugin";
-import { retrieveTripData, storeTripData } from "./storacha/tripStorage.ts";
+import { storeTripData } from "./storacha/tripStorage.ts";
 import { connectWebServer, sendToAgent2 } from "./services/wsClient.ts";
+import { set } from "zod";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,7 +38,6 @@ declare module "@elizaos/core" {
 declare module "@elizaos/core" {
   interface Service {
     tripRouter?: (data: any) => Promise<string>;
-    retrieveTripData?: (cid: string) => Promise<any>;
   }
 }
 
@@ -94,43 +94,36 @@ async function startAgent(character: Character, directClient: DirectClient) {
     const storageClient = await getStorageClient(runtime as any);
 
     await runtime.initialize();
+    runtime.evaluate = async () => ['tripRouter'];
 
     runtime.registerAction({
       name: 'tripRouter',
       description: 'Plan by routing trip data to Agent2 and Store summarized trip data as an attachment in decentralized storage.',
-      similes: ['plan', 'trip', 'book', 'flight', 'save', 'upload'],
+      similes: ['plan', 'save'],
       validate: async () => true,
       handler: async (_, message, state, options, callback) => {
-        const msg=message.content.text.toLocaleLowerCase()
-        if(msg.includes("save") || msg.includes("upload") || msg.includes("store")){
-          await storeTripData(state, callback, storageClient)
-        }
+        const interactions = state.recentMessagesData?.slice(0, 5)
+        .sort((a, b) => a.createdAt - b.createdAt) || [];
 
-        if (msg.includes('plan') || msg.includes('trip') || msg.includes('book')) {
-          await sendToAgent2(msg);
-          connectWebServer(callback)
-        }
+        const msg = interactions
+        .map(interaction => interaction.content?.text || "")
+        .join("\n");
+
+        await sendToAgent2(msg);
+        await connectWebServer(callback)
+        setTimeout(() => {
+          storeTripData(state, callback, storageClient)
+        }, 4050);
       },
       examples: [
-        [{ user: "{{user1}}", content: { text: "Save my trip details." } },
-         { user: "{{agent}}", content: { text: "Trip data saved! Here is the link : https://{{CID}}.ipfs.w3s.link/" } }],
-      ],
-    });
-
-    runtime.registerAction({
-      name: 'retrieveTripData',
-      description: 'Retrieve trip data from decentralized storage using CID.',
-      similes: ['RETRIEVE', 'FETCH', 'LOAD', 'SEND'],
-      validate: async () => true,
-      handler: async (_, message, state, options, callback) => {
-        const msg=message.content.text
-        if(msg.includes("send") || msg.includes("retrieve") || msg.includes("fetch")){
-          await retrieveTripData(message, state, callback, storageClient)
-        }
-      },
-      examples: [
-        [{ user: "{{user1}}", content: { text: "Retrieve my trip data..." } },
-         { user: "{{agent}}", content: { text: "Here’s your trip data: { Budget... }" } }],
+        [
+          { user: "{{user1}}", content: { text: "Plan a trip for Goa" } },
+          { user: "{{Eliza}}", content: { text: "Sure! Sending it to TripMate agent..." } }
+        ],
+        [
+          { user: "{{user1}}", content: { text: "Save my trip." } },
+          { user: "{{Eliza}}", content: { text: "Trip data saved! here is the link: https://{{CID}}.ipfs.web3.link/" } }
+        ]
       ],
     });
 

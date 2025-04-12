@@ -2,7 +2,7 @@
   "name": "Eliza",
   "plugins": ["storagePlugin"],
   "clients": ["telegram"],
-  "modelProvider": "openrouter",
+  "modelProvider": "OPENROUTER",
   "settings": {
     "secrets": {
       "TELEGRAM_BOT_TOKEN":""
