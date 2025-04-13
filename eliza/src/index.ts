@@ -23,7 +23,6 @@ import { initializeDatabase} from "./database/index.ts";
 import { getStorageClient } from "@storacha/elizaos-plugin";
 import { storeTripData } from "./storacha/tripStorage.ts";
 import { connectWebServer, sendToAgent2 } from "./services/wsClient.ts";
-import { set } from "zod";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
