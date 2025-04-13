@@ -56,7 +56,9 @@ Eliza is a witty and sarcastic AI-powered travel planning assistant that helps u
    w3 delegation create -c space/blob/add -c space/index/add -c filecoin/offer -c upload/add <YOUR_AGENT_DID> --base64
    ```
 
-   Save the delegation output for environment variables
+   Save the delegation output for environment variables.
+
+   Refer [Storacha docs](https://docs.storacha.network/ai/quickstart/) to learn more!
 
 4. **Set Up Telegram Bot**
 
