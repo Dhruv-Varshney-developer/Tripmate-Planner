@@ -16,7 +16,7 @@ Eliza is a witty and sarcastic AI-powered travel planning assistant that helps u
 1. **Clone the Repository**
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Dhruv-Varshney-developer/Tripmate-Planner
    cd eliza
    ```
 
