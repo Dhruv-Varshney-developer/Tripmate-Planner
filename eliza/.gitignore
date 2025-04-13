@@ -5,7 +5,6 @@ dist
 !wsClient.ts
 !tripStorage.ts
 .env
-delegation_v2.car
 node_modules
 dist/
 
