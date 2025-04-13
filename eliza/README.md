@@ -117,33 +117,3 @@ This agent is part of the TripMate ecosystem and works in conjunction with:
 To run ELIZA with a local TripMate-Finder instance, clone and set up the TripMate-Finder repository first, then set WS_URL to your local WebSocket URL
 
 The WebSocket connection to TripMate-Finder is then automatically established using the WS_URL environment variable.
-
-## Features
-
-- Witty and sarcastic travel planning assistance
-- Integration with Storacha for decentralized storage
-- Real-time travel data through TripMate-Finder
-- Persistent conversation memory
-- Multi-client support (currently focused on Telegram)
-- Custom character configuration support
-
-## Troubleshooting
-
-1. **WebSocket Connection Issues**
-
-   - Verify the WS_URL in your .env file
-   - Ensure TripMate-Finder is running if using local development
-   - Check for any firewall restrictions
-
-2. **Storacha Integration Issues**
-
-   - Verify all Storacha-related environment variables
-   - Ensure the delegation hasn't expired
-   - Check space permissions
-
-3. **Database Issues**
-   - By default, SQLite database will be created at `data/db.sqlite`
-   - For PostgreSQL, ensure the connection URL is correct
-   - Check write permissions in the database directory
-
-
