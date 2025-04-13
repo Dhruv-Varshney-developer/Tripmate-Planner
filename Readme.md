@@ -20,7 +20,7 @@ Tripmate is a multi-agentic travel planning system powered by Storacha.
   Connects with the Planner Agent via API, fetching the latest travel-related data to enrich the planning experience.
 
 - **Tripmate-Share**:  
-  Currently in development. It will view final trip details from Storacha and display them in a shareable format. Friends and family can interact with this agent to ask questions, view plans, and leave comments or suggestions. All feedback will be stored back in Storacha and subsequently retrieved by the Planner Agent, creating a seamless collaborative loop.
+  It views final trip details from Storacha and display them in a shareable format. Friends and family can interact with this agent to ask questions, view plans, and leave comments or suggestions. All feedback is stored back in Storacha and subsequently retrieved by the Planner Agent, creating a seamless collaborative loop.
 
 For this project, please refer to [the Eliza README](eliza/README.md) for detailed installation and starting guide.
 
