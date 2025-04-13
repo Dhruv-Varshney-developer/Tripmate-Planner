@@ -1,46 +1,149 @@
-# Eliza
+# Eliza - TripMate Planner Agent
 
-## Edit the character files
+Eliza is a witty and sarcastic AI-powered travel planning assistant that helps users plan their perfect vacation while maintaining a humorous tone. This agent is part of the larger TripMate ecosystem and integrates with Storacha for decentralized storage.
 
-Open `src/character.ts` to modify the default character. Uncomment and edit.
+## Prerequisites
 
-### Custom characters
+- Node.js version 22 or higher
+- pnpm package manager
+- Git
+- Telegram account (for bot creation)
+- OpenRouter API key
+- Storacha account and w3cli tools
 
-To load custom characters instead:
-- Go to `@BotFather` on telegram. Create a new bot with the username you want to have and get the Telegram Bot Token. For more detail, read [this blog](https://learn.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-telegram?view=azure-bot-service-4.0)
-- Replace `$TELEGRAM_BOT_TOKEN` with actual token in `character.eliza.json`
-- Use `pnpm start --characters="path/to/your/character.json"`
-- Multiple character files can be loaded simultaneously
+## Installation Steps
 
-### Add clients
-```
-# in character.ts
-clients: [Clients.TWITTER, Clients.DISCORD],
+1. **Clone the Repository**
 
-# in character.json
-clients: ["twitter", "discord"]
-```
+   ```bash
+   git clone <repository-url>
+   cd eliza
+   ```
 
-## Duplicate the .env.example template
+2. **Install Dependencies**
 
-```bash
-cp .env.example .env
-```
+   ```bash
+   pnpm install
+   ```
 
-\* Fill out the .env file with your own values.
+3. **Set Up Storacha Integration**
 
-### Add login credentials and keys to .env
-```
+   a. Install w3cli tool:
 
-OPENROUTER_API_KEY="sk-xx-xx-xxx"
+   ```bash
+   npm install -g @web3-storage/w3cli
+   ```
 
-```
+   b. Generate a DID (Decentralized Identifier):
 
-## Install dependencies and start your agent
+   ```bash
+   w3 key create
+   ```
 
-```bash
-pnpm i && pnpm start
-```
-Note: this requires node to be at least version 22 when you install packages and run the agent.
+   Save both the private key (starts with Mg...) and public key (starts with did:key:)
+
+   c. Create a Space:
+
+   ```bash
+   w3 space create [YOUR_SPACE_NAME]
+   ```
+
+   Save the space DID for later use
+
+   d. Create Delegation:
+
+   ```bash
+   w3 delegation create -c space/blob/add -c space/index/add -c filecoin/offer -c upload/add <YOUR_AGENT_DID> --base64
+   ```
+
+   Save the delegation output for environment variables
+
+4. **Set Up Telegram Bot**
+
+   - Go to [@BotFather](https://t.me/botfather) on Telegram.
+   - Create a new bot using the `/newbot` command
+   - Save the bot token provided by BotFather
+
+5. **Configure Environment Variables**
+
+   Create a `.env` file in the project root:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   Add the following variables to your `.env` file:
+
+   ```
+   # Required API Keys
+   OPENROUTER_API_KEY="your-openrouter-api-key"
+   TELEGRAM_BOT_TOKEN="your-telegram-bot-token"
+
+   # Storacha Configuration
+   STORACHA__AGENT_PRIVATE_KEY="your-private-key-from-w3-key-create"
+   STORACHA__AGENT_DELEGATION="your-delegation-from-w3-delegation-create"
+
+   # WebSocket Configuration (choose one)
+   WS_URL="wss://tripmate-finder-production.up.railway.app/"
+   # or for local development after setting up [Tripmate-Finder](https://github.com/Dhruv-Varshney-developer/Tripmate-Finder):
+   # WS_URL="ws://localhost:8765"
 
 
+
+   # Optional Database Configuration
+   # POSTGRES_URL="your-postgres-url"  # If using PostgreSQL
+   # SQLITE_FILE="custom/path/to/db.sqlite"  # If using custom SQLite path
+   ```
+
+6. **Start the Agent**
+
+   ```bash
+   pnpm start
+   ```
+
+   For custom character configuration:
+
+   ```bash
+   pnpm start --characters="path/to/your/character.json"
+   ```
+
+## Integration with TripMate Ecosystem
+
+This agent is part of the TripMate ecosystem and works in conjunction with:
+
+- [TripMate-Finder](https://github.com/Dhruv-Varshney-developer/Tripmate-Finder) - Provides real-time travel data
+- [TripMate-Share](https://github.com/Dhruv-Varshney-developer/Tripmate-Share) - Handles sharing travel information
+
+The WebSocket connection to TripMate-Finder is automatically established using the WS_URL environment variable.
+
+## Features
+
+- Witty and sarcastic travel planning assistance
+- Integration with Storacha for decentralized storage
+- Real-time travel data through TripMate-Finder
+- Persistent conversation memory
+- Multi-client support (currently focused on Telegram)
+- Custom character configuration support
+
+## Troubleshooting
+
+1. **WebSocket Connection Issues**
+
+   - Verify the WS_URL in your .env file
+   - Ensure TripMate-Finder is running if using local development
+   - Check for any firewall restrictions
+
+2. **Storacha Integration Issues**
+
+   - Verify all Storacha-related environment variables
+   - Ensure the delegation hasn't expired
+   - Check space permissions
+
+3. **Database Issues**
+   - By default, SQLite database will be created at `data/db.sqlite`
+   - For PostgreSQL, ensure the connection URL is correct
+   - Check write permissions in the database directory
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
