@@ -146,6 +146,4 @@ The WebSocket connection to TripMate-Finder is then automatically established us
    - For PostgreSQL, ensure the connection URL is correct
    - Check write permissions in the database directory
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
