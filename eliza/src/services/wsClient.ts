@@ -1,7 +1,11 @@
-import {HandlerCallback } from '@elizaos/core';
+import { HandlerCallback } from '@elizaos/core';
 import WebSocket from 'ws';
 
-const WS_URL = 'ws://localhost:8765';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const WS_URL = process.env.WS_URL || 'ws://localhost:8765';
 const ws = new WebSocket(WS_URL);
 
 ws.on('open', () => {
@@ -9,22 +13,22 @@ ws.on('open', () => {
 });
 
 export function connectWebServer(callback: HandlerCallback) {
-  
-    ws.on('message', async (data) => {
-      try {
-        const parsed = JSON.parse(data.toString());
-  
-        if (!parsed.message || typeof parsed.message !== 'string') {
-          console.warn('Invalid message received from TripMate:', data.toString());
-          return;
-        }
 
-          await callback?.({ text: `${parsed.message}` });
-      } catch (err) {
-        console.error('Failed to handle message from TripMate:', err);
+  ws.on('message', async (data) => {
+    try {
+      const parsed = JSON.parse(data.toString());
+
+      if (!parsed.message || typeof parsed.message !== 'string') {
+        console.warn('Invalid message received from TripMate:', data.toString());
+        return;
       }
-    });
-  }
+
+      await callback?.({ text: `${parsed.message}` });
+    } catch (err) {
+      console.error('Failed to handle message from TripMate:', err);
+    }
+  });
+}
 
 
 ws.on('error', (err) => console.error('WS error:', err));

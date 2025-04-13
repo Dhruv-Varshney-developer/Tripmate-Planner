@@ -1,96 +1,121 @@
-# Eliza
+# Eliza - TripMate Planner Agent
 
-## Edit the character files
+Eliza is a witty and sarcastic AI-powered travel planning assistant that helps users plan their perfect vacation while maintaining a humorous tone. This agent is part of the larger TripMate ecosystem and integrates with Storacha for decentralized storage.
 
-Open `src/character.ts` to modify the default character. Uncomment and edit.
+## Prerequisites
 
-### Custom characters
+- Node.js version 22 or higher
+- pnpm package manager
+- Git
+- Telegram account (for bot creation)
+- OpenRouter API key
+- Storacha account and w3cli tools
 
-To load custom characters instead:
-- Go to `@BotFather` on telegram. Create a new bot with the username you want to have and get the Telegram Bot Token. For more detail, read [this blog](https://learn.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-telegram?view=azure-bot-service-4.0)
-- Replace `$TELEGRAM_BOT_TOKEN` with actual token in `character.eliza.json`
-- Use `pnpm start --characters="path/to/your/character.json"`
-- Multiple character files can be loaded simultaneously
+## Installation Steps
 
-### Add clients
-```
-# in character.ts
-clients: [Clients.TWITTER, Clients.DISCORD],
+1. **Clone the Repository**
 
-# in character.json
-clients: ["twitter", "discord"]
-```
+   ```bash
+   git clone <repository-url>
+   cd eliza
+   ```
 
-## Duplicate the .env.example template
+2. **Install Dependencies**
 
-```bash
-cp .env.example .env
-```
+   ```bash
+   pnpm install
+   ```
 
-\* Fill out the .env file with your own values.
+3. **Set Up Storacha Integration**
 
-### Add login credentials and keys to .env
-```
-DISCORD_APPLICATION_ID="discord-application-id"
-DISCORD_API_TOKEN="discord-api-token"
-...
-OPENROUTER_API_KEY="sk-xx-xx-xxx"
-...
-TWITTER_USERNAME="username"
-TWITTER_PASSWORD="password"
-TWITTER_EMAIL="your@email.com"
-```
+   a. Install w3cli tool:
 
-## Install dependencies and start your agent
+   ```bash
+   npm install -g @web3-storage/w3cli
+   ```
 
-```bash
-pnpm i && pnpm start
-```
-Note: this requires node to be at least version 22 when you install packages and run the agent.
+   b. Generate a DID (Decentralized Identifier):
 
-## Run with Docker
+   ```bash
+   w3 key create
+   ```
 
-### Build and run Docker Compose (For x86_64 architecture)
+   Save both the private key (starts with Mg...) and public key (starts with did:key:)
 
-#### Edit the docker-compose.yaml file with your environment variables
+   c. Create a Space:
 
-```yaml
-services:
-    eliza:
-        environment:
-            - OPENROUTER_API_KEY=blahdeeblahblahblah
-```
+   ```bash
+   w3 space create [YOUR_SPACE_NAME]
+   ```
 
-#### Run the image
+   Save the space DID for later use
 
-```bash
-docker compose up
-```
+   d. Create Delegation:
 
-### Build the image with Mac M-Series or aarch64
+   ```bash
+   w3 delegation create -c space/blob/add -c space/index/add -c filecoin/offer -c upload/add <YOUR_AGENT_DID> --base64
+   ```
 
-Make sure docker is running.
+   Save the delegation output for environment variables.
 
-```bash
-# The --load flag ensures the built image is available locally
-docker buildx build --platform linux/amd64 -t eliza-starter:v1 --load .
-```
+   Refer [Storacha docs](https://docs.storacha.network/ai/quickstart/) to learn more!
 
-#### Edit the docker-compose-image.yaml file with your environment variables
+4. **Set Up Telegram Bot**
 
-```yaml
-services:
-    eliza:
-        environment:
-            - OPENROUTER_API_KEY=blahdeeblahblahblah
-```
+   - Go to [@BotFather](https://t.me/botfather) on Telegram.
+   - Create a new bot using the `/newbot` command
+   - Save the bot token provided by BotFather
 
-#### Run the image
+5. **Configure Environment Variables**
 
-```bash
-docker compose -f docker-compose-image.yaml up
-```
+   Create a `.env` file in the project root:
 
-# Deploy with Railway
+   ```bash
+   cp .env.example .env
+   ```
 
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/template/aW47_j)
+   Add the following variables to your `.env` file:
+
+   ```
+   # Required API Keys
+   OPENROUTER_API_KEY="your-openrouter-api-key"
+   TELEGRAM_BOT_TOKEN="your-telegram-bot-token"
+
+   # Storacha Configuration
+   STORACHA__AGENT_PRIVATE_KEY="your-private-key-from-w3-key-create"
+   STORACHA__AGENT_DELEGATION="your-delegation-from-w3-delegation-create"
+
+   # WebSocket Configuration (choose one)
+   WS_URL="wss://tripmate-finder-production.up.railway.app/"
+   # or for local development after setting up [Tripmate-Finder](https://github.com/Dhruv-Varshney-developer/Tripmate-Finder):
+   # WS_URL="ws://localhost:8765"
+
+
+
+   # Optional Database Configuration
+   # POSTGRES_URL="your-postgres-url"  # If using PostgreSQL
+   # SQLITE_FILE="custom/path/to/db.sqlite"  # If using custom SQLite path
+   ```
+
+6. **Start the Agent**
+
+   ```bash
+   pnpm start
+   ```
+
+   For custom character configuration:
+
+   ```bash
+   pnpm start --characters="path/to/your/character.json"
+   ```
+
+## Integration with TripMate Ecosystem
+
+This agent is part of the TripMate ecosystem and works in conjunction with:
+
+- [TripMate-Finder](https://github.com/Dhruv-Varshney-developer/Tripmate-Finder) - Provides real-time travel data
+- [TripMate-Share](https://github.com/Dhruv-Varshney-developer/Tripmate-Share) - Handles sharing travel information
+
+To run ELIZA with a local TripMate-Finder instance, clone and set up the TripMate-Finder repository first, then set WS_URL to your local WebSocket URL
+
+The WebSocket connection to TripMate-Finder is then automatically established using the WS_URL environment variable.
