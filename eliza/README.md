@@ -114,7 +114,9 @@ This agent is part of the TripMate ecosystem and works in conjunction with:
 - [TripMate-Finder](https://github.com/Dhruv-Varshney-developer/Tripmate-Finder) - Provides real-time travel data
 - [TripMate-Share](https://github.com/Dhruv-Varshney-developer/Tripmate-Share) - Handles sharing travel information
 
-The WebSocket connection to TripMate-Finder is automatically established using the WS_URL environment variable.
+To run ELIZA with a local TripMate-Finder instance, clone and set up the TripMate-Finder repository first, then set WS_URL to your local WebSocket URL
+
+The WebSocket connection to TripMate-Finder is then automatically established using the WS_URL environment variable.
 
 ## Features
 
