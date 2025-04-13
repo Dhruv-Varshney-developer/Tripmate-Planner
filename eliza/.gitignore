@@ -11,3 +11,5 @@ dist/
 db.sqlite
 .idea
 .tee-cloud
+
+cache/
