@@ -31,3 +31,12 @@ This project was initially started by importing code from the lit-storacha demo 
 As development progressed, we realized the need to customize the Storacha integration to fit our specific use case — a trip planning agent.
 
 While we referenced the original repository during the early stages, the current Storacha integration is entirely custom-written and independent of the lit-storacha demo. Storacha remains one of our supporters, and we appreciate their support for this project.
+
+## Learn more about the project on these links:
+- [TripMate Planner](https://github.com/Dhruv-Varshney-developer/Tripmate-Planner) - Agent 1
+- [TripMate Finder](https://github.com/Dhruv-Varshney-developer/Tripmate-Finder)- Agent 2
+- [TripMate Share](https://github.com/Dhruv-Varshney-developer/Tripmate-Share)- Agent 3
+- [Technical Whitepaper](https://motley-popcorn-c4a.notion.site/Technical-docs-1d52ab2404df8018afdfe86f4e8fdd29)
+- [Tripmate Overview](https://docs.google.com/document/d/1YahKkW0qBaG_6H9lp3DIPhmn56ApjW2dxbJNvrDZqOg/edit?usp=sharing)
+- [Demo video](https://www.youtube.com/watch?v=cyKxdZ3uryQ)
+- [Presentation Link](https://www.canva.com/design/DAGkjcxFXBQ/az25u5Wo1RgXVDd7d78UYQ/edit?utm_content=DAGkjcxFXBQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) 
